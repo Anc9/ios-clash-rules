@@ -60,19 +60,24 @@ GitHub Actions 会自动运行同样的结构检查。它无法替代 iOS 真机
 
 此仓库的规则集文件通过 URL 引用第三方维护的 MRS 数据，实际内容及更新由第三方维护。
 
+## 规则集来源
+
+本仓库的路由结构和策略组由本仓库维护；远程 MRS 规则集来自 [DustinWin/ruleset_geodata](https://github.com/DustinWin/ruleset_geodata)，使用其 [mihomo-ruleset 发布文件](https://github.com/DustinWin/ruleset_geodata/releases/tag/mihomo-ruleset)。
+
+当前引用的规则集：
+
+| 文件 | 用途 |
+| --- | --- |
+| `private.mrs` / `privateip.mrs` | 私有网络域名与 IP |
+| `apple-cn.mrs` / `microsoft-cn.mrs` | 苹果中国、微软中国 |
+| `ai.mrs` / `ads.mrs` | AI 服务、广告域名 |
+| `netflix.mrs` / `disney.mrs` / `youtube.mrs` / `media.mrs` | 流媒体域名 |
+| `netflixip.mrs` / `mediaip.mrs` | 流媒体 IP |
+| `proxy.mrs` / `cn.mrs` | 国外域名、国内域名 |
+| `telegramip.mrs` / `cnip.mrs` | Telegram IP、国内 IP |
+
+规则文件中的每个规则集设置为每 24 小时检查一次。第三方规则集的具体内容和更新节奏由其上游项目决定，本仓库只负责引用和组合，不复制维护这些 MRS 文件。
+
 ## License
 
 MIT License，详见 [`LICENSE`](LICENSE)。
-
-## 服务商说明
-
-根据你提供的梯子网站截图，服务商宣称以下能力（这是服务商宣传信息，不是本仓库的实测保证）：
-
-- Netflix、Disney、YouTube、ChatGPT、Copilot：香港、日本节点可用
-- pixeldrain：香港、日本节点绕过每日高速流量限额
-- Mega：香港、日本节点绕过游客 5G 传输限制
-- EH：香港、日本节点绕过 509，免费日本节点另有说明
-- saucenao：香港节点绕过游客查询次数限制
-- sankakucomplex：香港、日本节点绕过图片加载限制
-
-实际可用性取决于节点出口、账号状态、平台策略和服务商线路，规则命中不等于地区解锁或不限速。
