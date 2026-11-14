@@ -1,7 +1,7 @@
 # ClashRules / iOS 分流规则
-# 版本: v1.5
+# 版本: v2.2.1
 # 作者: Anc9 (GitHub: https://github.com/Anc9)
-# 更新日期: 2026-11-14
+# 更新日期: 2026-11-15
 # 适用客户端: ProjectClash / Clash-Client (Mihomo)
 # 这是「规则方案」文件：在配置库里选择本文件作为规则方案；原机场订阅继续作为节点来源。
 # 顶层只显示 4 个策略组；地区组设置 hidden: true，可从「🚀 代理选择」等入口访问。
@@ -9,7 +9,6 @@
 # 保留旧版规则集和路由；不包含节点、节点密码、订阅 URL 或机场 DNS。
 # 注意：ProjectClash 的原始(Original)模式不会套用单独导入的规则方案。
 
-mode: rule
 proxy-groups:
 - name: 🚀 代理选择
   type: select
@@ -358,6 +357,10 @@ rules:
 - RULE-SET,cm-media,🎬 流媒体
 - RULE-SET,cm-netflixip,🎬 流媒体,no-resolve
 - RULE-SET,cm-mediaip,🎬 流媒体,no-resolve
+- DOMAIN-SUFFIX,auth.openai.com,🤖 AI 服务
+- DOMAIN-SUFFIX,oaiusercontent.com,🤖 AI 服务
+- DOMAIN-SUFFIX,oaistatic.com,🤖 AI 服务
+- DOMAIN-SUFFIX,ws.chatgpt.com,🤖 AI 服务
 - RULE-SET,cm-ai,🤖 AI 服务
 - DOMAIN-SUFFIX,chatgpt.com,🤖 AI 服务
 - DOMAIN-SUFFIX,openai.com,🤖 AI 服务
