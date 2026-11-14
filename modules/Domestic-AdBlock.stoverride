@@ -7,7 +7,17 @@ category: AdBlock
 version: 1.0.0
 date: '2026-11-14'
 
+rule-providers:
+  domestic-ads:
+    type: http
+    behavior: domain
+    format: mrs
+    path: ./ruleset/domestic-ads.mrs
+    url: https://github.com/DustinWin/ruleset_geodata/releases/download/mihomo-ruleset/ads.mrs
+    interval: 86400
+
 rules:
+- RULE-SET,domestic-ads,REJECT
 - DOMAIN,df.tanx.com,REJECT
 - DOMAIN,bdlog.tanx.com,REJECT
 - DOMAIN,ipm.atm.youku.com,REJECT
