@@ -4,7 +4,7 @@ name: iOS 国内 App 去广告
 desc: 常用国内 App 广告域名拦截与少量开屏接口拒绝；需要 HTTPS 解密的域名已列在 http.mitm
 author: Anc9
 category: AdBlock
-version: 1.0.0
+version: 1.1.0
 date: '2026-11-14'
 
 rule-providers:
@@ -44,6 +44,8 @@ rules:
 - DOMAIN,api-access.pangolin-sdk-toutiao1.com,REJECT
 - DOMAIN,api-access.pangolin-sdk-toutiao-b.com,REJECT
 - DOMAIN,poplayer.template.alibaba.com,REJECT
+- DOMAIN,data.bilibili.com,REJECT
+- DOMAIN,log.bilibili.com,REJECT
 
 http:
   mitm:
@@ -53,8 +55,10 @@ http:
   - guide-acs.m.taobao.com
   - poplayer.template.alibaba.com
   - r.inews.qq.com
+  - app.bilibili.com
   rewrite:
   - ^https?://(?:g-)?acs\.m\.goofish\.com/gw/mtop\.taobao\.idlecommerce\.splash\.ads(?:/|\?|$) - reject-dict
   - ^https?://acs\.m\.taobao\.com/gw/mtop\.taobao\.(?:idlecommerce\.splash\.ads|idle\.home\.welcome)(?:/|\?|$) - reject-dict
   - ^https?://acs\.m\.taobao\.com/gw/mtop\.alibaba\.advertisementservice\.getadv(?:/|\?|$) - reject-dict
   - ^https?://r\.inews\.qq\.com/(?:getSplash|getFullScreenPic)(?:/|\?|$) - reject-dict
+  - ^https?://app\.bilibili\.com/x/v2/splash/(?:list|show)(?:/|\?|$) - reject-dict
