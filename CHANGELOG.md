@@ -1,5 +1,13 @@
 # 变更记录
 
+## v2.2.0 — 2026-11-15
+
+- 新增 ChatGPT 专用 `fallback` 节点组，使用 `https://chatgpt.com/` 检查可用性。
+- AI 自动组优先检查日本、新加坡、美国、香港，保留手动选节点入口。
+- 补充 `auth.openai.com`、`oaiusercontent.com`、`oaistatic.com` 和 `ws.chatgpt.com` 分流。
+- 统一规则文件、去广告模块和文档版本为 `v2.2.0`。
+
+
 ## v2.1 — 2026-11-14
 
 - 改为保留 B 站开屏响应结构，仅清空 `show` / `event_list` 广告字段。
