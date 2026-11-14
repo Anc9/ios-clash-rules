@@ -1,0 +1,7 @@
+*.local.yaml
+*.local.yml
+*.secret.yaml
+*.secret.yml
+*.bak
+.DS_Store
+__pycache__/
