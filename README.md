@@ -2,7 +2,7 @@
 
 适用于 [ProjectClash/Clash-Client](https://github.com/ProjectClash/Clash-Client) 的个人分流规则方案。
 
-> 当前版本 **v1.3（待 iOS 实机完整验证）**。这不是机场节点订阅，也不是一份包含节点的独立完整配置。
+> 当前版本 **v1.4（待 iOS 实机完整验证）**。这不是机场节点订阅，也不是一份包含节点的独立完整配置。
 
 ## 目标
 
