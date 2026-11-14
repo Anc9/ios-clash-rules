@@ -4,7 +4,7 @@ name: iOS 国内 App 去广告
 desc: 常用国内 App 广告域名拦截与少量开屏接口拒绝；需要 HTTPS 解密的域名已列在 http.mitm
 author: Anc9
 category: AdBlock
-version: 1.2.0
+version: 1.3.0
 date: '2026-11-14'
 
 rule-providers:
@@ -58,10 +58,12 @@ http:
   - app.bilibili.com
   - upos-sz-static.bilivideo.com
   rewrite:
+  body-rewrite:
+  - ^https?://app\.bilibili\.com/x/v2/splash/list(?:\?.*)?$ response-jq .data={}
+  - ^https?://app\.bilibili\.com/x/v2/splash/show(?:\?.*)?$ response-jq .data={}
   - ^https?://(?:g-)?acs\.m\.goofish\.com/gw/mtop\.taobao\.idlecommerce\.splash\.ads(?:/|\?|$) - reject-dict
   - ^https?://acs\.m\.taobao\.com/gw/mtop\.taobao\.(?:idlecommerce\.splash\.ads|idle\.home\.welcome)(?:/|\?|$) - reject-dict
   - ^https?://acs\.m\.taobao\.com/gw/mtop\.alibaba\.advertisementservice\.getadv(?:/|\?|$) - reject-dict
   - ^https?://r\.inews\.qq\.com/(?:getSplash|getFullScreenPic)(?:/|\?|$) - reject-dict
-  - ^https?://app\.bilibili\.com/x/v2/splash/(?:list|show)(?:/|\?|$) - reject-dict
   - ^https?://upos-sz-static\.bilivideo\.com/ssaxcode/\w{2}/\w{2}/\w{32}-1-SPLASH(?:\?.*)?$ - reject-dict
   - ^https?://(?:\d{1,3}\.){3}\d{1,3}:8000/v1/resource/\w{32}-1-SPLASH(?:\?.*)?$ - reject-dict
