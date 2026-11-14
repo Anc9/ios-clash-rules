@@ -53,7 +53,7 @@ for rule in rules:
         assert len(parts) >= 3 and parts[1] in providers, f"unknown rule provider: {rule}"
         target = parts[2]
     else:
-        target = parts[-1] if parts[0] == "MATCH" ese parts[2]
+        target = parts[-1] if parts[0] == "MATCH" else parts[2]
     assert target in names or target in builtins, f"unknown target in rule: {rule}"
 
 for name, provider in providers.items():
