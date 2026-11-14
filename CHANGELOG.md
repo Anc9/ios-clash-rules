@@ -1,5 +1,11 @@
 # 变更记录
 
+## v2.2.1 — 2026-11-15
+
+- 移除规则方案顶层的 `mode` 字段，避免与 ProjectClash 配置模式产生歧义。
+- 补充 OpenAI 认证、上传、静态资源和 WebSocket 域名分流到「🤖 AI 服务」。
+- 保留原有策略组和 `url-test`，暂不引入 ChatGPT 专用 `fallback` 组。
+
 ## v2.1 — 2026-11-14
 
 - 改为保留 B 站开屏响应结构，仅清空 `show` / `event_list` 广告字段。
