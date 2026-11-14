@@ -2,7 +2,7 @@
 
 适用于 [ProjectClash/Clash-Client](https://github.com/ProjectClash/Clash-Client) 的个人分流规则方案。
 
-> 当前版本 **v1.5（待 iOS 实机完整验证）**。这不是机场节点订阅，也不是一份包含节点的独立完整配置。
+> 当前版本 **v2.2.0（待 iOS 实机完整验证）**。这不是机场节点订阅，也不是一份包含节点的独立完整配置。
 
 ## 目标
 
@@ -39,6 +39,7 @@
 - `🎬 流媒体`：Netflix、Disney+、YouTube 及综合媒体规则走香港 / 日本 / 新加坡 / 美国节点
 - `🛡 广告拦截`：`REJECT` 开启，`DIRECT` 关闭
 - 各地区自动组为 `url-test`，测速目标 `https://www.gstatic.com/generate_204`，每 600 秒检查、容差 80 ms
+- `🤖 AI 自动` 使用 `fallback`，按日本、新加坡、美国、香港顺序检查 `https://chatgpt.com/`，每 300 秒检查；仍保留手动选择入口。
 - `url-test` 衡量的是测速目标的响应延迟，**不是下载带宽、稳定性或 AI 地区解锁保证**
 
 ## 修改与验证
