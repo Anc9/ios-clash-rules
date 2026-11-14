@@ -1,0 +1,50 @@
+# ProjectClash iOS domestic app ad blocking module
+# Scope: advertising endpoints only; no VIP unlocks, no remote scripts.
+name: iOS 国内 App 去广告
+desc: 常用国内 App 广告域名拦截与少量开屏接口拒绝；需要 HTTPS 解密的域名已列在 http.mitm
+author: Anc9
+category: AdBlock
+version: 1.0.0
+date: '2026-11-14'
+
+rules:
+- DOMAIN,df.tanx.com,REJECT
+- DOMAIN,bdlog.tanx.com,REJECT
+- DOMAIN,ipm.atm.youku.com,REJECT
+- DOMAIN,ssp-track.adn-plus.com.cn,REJECT
+- DOMAIN,adx-track.adn-plus.com.cn,REJECT
+- DOMAIN,statics.adanxing.com,REJECT
+- DOMAIN,aaid.uyunad.com,REJECT
+- DOMAIN,mi.gdt.qq.com,REJECT
+- DOMAIN,ii.gdt.qq.com,REJECT
+- DOMAIN,sdk.e.qq.com,REJECT
+- DOMAIN,sdkconfig.e.qq.com,REJECT
+- DOMAIN,adsmind.gdtimg.com,REJECT
+- DOMAIN,splashqqlive.gtimg.com,REJECT
+- DOMAIN,ads-union.jd.com,REJECT
+- DOMAIN,jzt.jd.com,REJECT
+- DOMAIN,c-nfa.jd.com,REJECT
+- DOMAIN,bdsp.x.jd.com,REJECT
+- DOMAIN,optimus-ads.amap.com,REJECT
+- DOMAIN,amap-aos-info-nogw.amap.com,REJECT
+- DOMAIN,wmapi.meituan.com,REJECT
+- DOMAIN,m.client.10010.com,REJECT
+- DOMAIN,api.ys7.com,REJECT
+- DOMAIN,api-access.pangolin-sdk-toutiao.com,REJECT
+- DOMAIN,api-access.pangolin-sdk-toutiao1.com,REJECT
+- DOMAIN,api-access.pangolin-sdk-toutiao-b.com,REJECT
+- DOMAIN,poplayer.template.alibaba.com,REJECT
+
+http:
+  mitm:
+  - acs.m.goofish.com
+  - g-acs.m.goofish.com
+  - acs.m.taobao.com
+  - guide-acs.m.taobao.com
+  - poplayer.template.alibaba.com
+  - r.inews.qq.com
+  rewrite:
+  - ^https?://(?:g-)?acs\.m\.goofish\.com/gw/mtop\.taobao\.idlecommerce\.splash\.ads(?:/|\?|$) - reject-dict
+  - ^https?://acs\.m\.taobao\.com/gw/mtop\.taobao\.(?:idlecommerce\.splash\.ads|idle\.home\.welcome)(?:/|\?|$) - reject-dict
+  - ^https?://acs\.m\.taobao\.com/gw/mtop\.alibaba\.advertisementservice\.getadv(?:/|\?|$) - reject-dict
+  - ^https?://r\.inews\.qq\.com/(?:getSplash|getFullScreenPic)(?:/|\?|$) - reject-dict
