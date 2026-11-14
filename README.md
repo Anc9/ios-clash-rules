@@ -2,7 +2,7 @@
 
 适用于 [ProjectClash/Clash-Client](https://github.com/ProjectClash/Clash-Client) 的个人分流规则方案。
 
-> 当前版本 **v1.5（待 iOS 实机完整验证）**。这不是机场节点订阅，也不是一份包含节点的独立完整配置。
+> 当前版本 **v2.2.1（待 iOS 实机完整验证）**。这不是机场节点订阅，也不是一份包含节点的独立完整配置。
 
 ## 目标
 
@@ -39,6 +39,7 @@
 - `🎬 流媒体`：Netflix、Disney+、YouTube 及综合媒体规则走香港 / 日本 / 新加坡 / 美国节点
 - `🛡 广告拦截`：`REJECT` 开启，`DIRECT` 关闭
 - 各地区自动组为 `url-test`，测速目标 `https://www.gstatic.com/generate_204`，每 600 秒检查、容差 80 ms
+- OpenAI 相关域名（认证、上传、静态资源和 WebSocket）统一进入 `🤖 AI 服务`
 - `url-test` 衡量的是测速目标的响应延迟，**不是下载带宽、稳定性或 AI 地区解锁保证**
 
 ## 修改与验证
@@ -51,6 +52,8 @@ python scripts/validate.py
 ```
 
 GitHub Actions 会自动运行同样的结构检查。它无法替代 iOS 真机验证或检查远程 MRS 文件是否下载成功。
+
+规则方案只保留 `proxy-groups`、`rule-providers`、`rules` 和 `sub-rules`，不要加入 `proxies`、`proxy-providers`、`dns` 或其他完整配置字段。
 
 变更建议：优先一次只改一类（地区分组、AI 分流、广告、DNS），记录变更及回归结果到 [`CHANGELOG.md`](CHANGELOG.md)。
 
