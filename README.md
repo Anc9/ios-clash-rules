@@ -60,6 +60,20 @@ GitHub Actions 会自动运行同样的结构检查。它无法替代 iOS 真机
 
 此仓库的规则集文件通过 URL 引用第三方维护的 MRS 数据，实际内容及更新由第三方维护。
 
+## HTTPS 去广告模块
+
+模块与分流规则分开维护，但同在本仓库：
+
+[`modules/Domestic-AdBlock.stoverride`](modules/Domestic-AdBlock.stoverride)
+
+Raw 导入地址：
+
+`https://raw.githubusercontent.com/Anc9/ios-clash-rules/main/modules/Domestic-AdBlock.stoverride`
+
+当前模块针对 QQ/腾讯广告接口、淘宝/闲鱼、京东、高德、美团、中国联通、哔哩哔哩等常见广告域名，并对闲鱼、淘宝、腾讯新闻的少量开屏接口做精确拒绝。模块不包含 VIP 解锁、不加载远程脚本、不修改正常业务响应。
+
+在 Clash 的「Modules」中添加后，按官方流程安装并信任证书，再打开 HTTPS Decryption。普通域名拦截可直接生效；需要接口级拒绝的条目要求证书状态为 Ready。广告接口会随 App 版本变化，遇到漏网或误杀时应先在 Modules 中关闭模块，再根据 Activity 日志逐项调整。
+
 ## 规则集来源
 
 本仓库的路由结构和策略组由本仓库维护；远程 MRS 规则集来自 [DustinWin/ruleset_geodata](https://github.com/DustinWin/ruleset_geodata)，使用其 [mihomo-ruleset 发布文件](https://github.com/DustinWin/ruleset_geodata/releases/tag/mihomo-ruleset)。
