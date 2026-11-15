@@ -1,0 +1,15 @@
+# ProjectClash iOS JD response rewrite module
+# Scope: JD startup response cleanup only.
+name: 京东 App Rewrite
+desc: 清理京东开屏响应中的展示时间和广告标记
+author: Anc9
+category: AdBlock
+version: 1.0.0
+date: '2026-11-15'
+
+http:
+  mitm:
+  - api.m.jd.com
+  rewrite:
+  body-rewrite:
+  - ^https?://api\.m\.jd\.com/client\.action\?functionId=start(?:&.*)?$ response-jq . |= if (.images | type) == "array" then (.images |= map(if type == "array" then map(if has("showTimes") then .showTimes = 0 | .onlineTime = "2030-12-24 00:00:00" | .referralsTime = "2030-12-25 00:00:00" | .time = 0 else . end) else . end) | .countdown = 100 | .showTimesDaily = 0) else . end
