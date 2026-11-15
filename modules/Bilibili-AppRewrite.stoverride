@@ -4,7 +4,7 @@ name: 哔哩哔哩 App Rewrite
 desc: 清理哔哩哔哩开屏响应字段和开屏 CDN 响应
 author: Anc9
 category: AdBlock
-version: 1.0.0
+version: 1.0.1
 date: '2026-11-15'
 
 rules:
