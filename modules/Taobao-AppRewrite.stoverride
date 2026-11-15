@@ -11,6 +11,6 @@ http:
   mitm:
   - acs.m.taobao.com
   rewrite:
+    - ^https?://acs\.m\.taobao\.com/gw/mtop\.taobao\.(?:idlecommerce\.splash\.ads|idle\.home\.welcome)(?:/|\?|$) - reject-dict
+    - ^https?://acs\.m\.taobao\.com/gw/mtop\.alibaba\.advertisementservice\.getadv(?:/|\?|$) - reject-dict
   body-rewrite:
-  - ^https?://acs\.m\.taobao\.com/gw/mtop\.taobao\.(?:idlecommerce\.splash\.ads|idle\.home\.welcome)(?:/|\?|$) - reject-dict
-  - ^https?://acs\.m\.taobao\.com/gw/mtop\.alibaba\.advertisementservice\.getadv(?:/|\?|$) - reject-dict
