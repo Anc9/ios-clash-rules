@@ -4,7 +4,7 @@ name: 闲鱼 App Rewrite
 desc: 拒绝闲鱼开屏广告 JSON 响应
 author: Anc9
 category: AdBlock
-version: 1.0.0
+version: 1.0.1
 date: '2026-11-15'
 
 http:
