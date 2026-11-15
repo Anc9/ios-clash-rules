@@ -1,7 +1,7 @@
 # ProjectClash iOS domestic app ad blocking module
 # Scope: advertising endpoints only; no VIP unlocks, no remote scripts.
 name: iOS 国内 App 去广告
-desc: 常用国内 App 广告域名拦截；HTTPS 响应处理由 Splash-AdBlock 模块负责
+desc: 常用国内 App 广告域名拦截；各 App HTTPS 响应处理由对应 App Rewrite 模块负责
 author: Anc9
 category: AdBlock
 version: 1.6.0
