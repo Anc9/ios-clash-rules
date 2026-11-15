@@ -72,7 +72,7 @@ GitHub Actions 会自动运行同样的结构检查。它无法替代 iOS 真机
 
 ## HTTPS 去广告模块
 
-模块按职责拆分，可以按需启用。
+去广告规则合并为一个模块；单个 App 的 Rewrite 独立启用。
 
 ### 域名广告拦截
 
@@ -81,14 +81,6 @@ GitHub Actions 会自动运行同样的结构检查。它无法替代 iOS 真机
 `https://raw.githubusercontent.com/Anc9/ios-clash-rules/https-module/modules/Domestic-AdBlock.stoverride`
 
 负责远程广告 MRS 和普通广告域名拦截。
-
-### 开屏广告域名
-
-[`modules/Splash-AdBlock.stoverride`](modules/Splash-AdBlock.stoverride)
-
-`https://raw.githubusercontent.com/Anc9/ios-clash-rules/https-module/modules/Splash-AdBlock.stoverride`
-
-负责明确的开屏广告域名拦截，不启用 MITM。
 
 ### 单个 App Rewrite
 
