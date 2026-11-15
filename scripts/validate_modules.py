@@ -95,14 +95,12 @@ for path in sorted(MODULES.glob("*.stoverride")):
             fail(f"{path.name}: malformed rewrite entry")
 
     body_rewrite = http.get("body-rewrite", [])
-    if isinstance(rewrite, dict):
-        body_rewrite = rewrite.get("body-rewrite", body_rewrite)
     if body_rewrite is None:
         body_rewrite = []
     if not isinstance(body_rewrite, list):
         fail(f"{path.name}: body-rewrite must be a list")
-    if not rules and not body_rewrite:
-        fail(f"{path.name}: module must contain rules or body-rewrite")
+    if not rules and not rewrite and not body_rewrite:
+        fail(f"{path.name}: module must contain rules, rewrite, or body-rewrite")
     for item in body_rewrite:
         if not isinstance(item, str) or len(item.split(None, 1)) < 2:
             fail(f"{path.name}: malformed body-rewrite entry")
