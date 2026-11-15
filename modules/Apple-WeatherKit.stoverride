@@ -1,0 +1,30 @@
+# ProjectClash Apple WeatherKit rewrite module
+# Derived from NSRingo/WeatherKit (Apache-2.0).
+# Scope: WeatherKit feature and data response routing only.
+name: Apple WeatherKit Rewrite
+desc: |-
+  Apple WeatherKit feature and weather data rewrite
+author: |-
+  NSRingo WeatherKit contributors
+homepage: https://github.com/NSRingo/WeatherKit
+category: Apple
+version: 1.0.0
+date: '2026-11-15'
+
+rules:
+  - DOMAIN,weather-analytics-events.apple.com,REJECT-DROP
+  - DOMAIN-SUFFIX,tthr.apple.com,REJECT-DROP
+  - DOMAIN,tether.edge.apple,REJECT-DROP
+  - AND,((OR,((IP-ASN,714,no-resolve),(IP-ASN,6185,no-resolve))),(PROTOCOL,QUIC)),REJECT-DROP
+
+http:
+  mitm:
+    - weatherkit.apple.com
+  url-rewrite:
+    # WeatherKit availability response
+    - ^https?:\/\/weatherkit\.apple\.com\/api\/v1\/availability\/ https://weatherkit.pages.dev/api/v1/availability/ transparent
+    # WeatherKit weather response
+    - ^https?:\/\/weatherkit\.apple\.com\/api\/v2\/weather\/ https://weatherkit.pages.dev/api/v2/weather/ transparent
+    # WeatherKit weather alerts response
+    - ^https?:\/\/weatherkit\.apple\.com\/api\/v1\/weatherAlerts\?([^#]*&ids=[^&#]*-[0-9]{9}(?:&[^#]*)?)$ https://weatherkit.pages.dev/api/v1/weatherAlerts?$1 transparent
+    - ^https?:\/\/weatherkit\.apple\.com\/api\/v1\/weatherAlerts\?([^#]*&ids=-?[0-9]+(?:\.[0-9]+)?,-?[0-9]+(?:\.[0-9]+)?(?:&[^#]*)?)$ https://weatherkit.pages.dev/api/v1/weatherAlerts?$1 transparent

@@ -72,6 +72,10 @@ for path in sorted(MODULES.glob("*.stoverride")):
             if len(parts) < 3:
                 fail(f"{path.name}: malformed rule {rule}")
             target = parts[2].upper()
+        elif kind == "AND":
+            if len(parts) < 2:
+                fail(f"{path.name}: malformed rule {rule}")
+            target = parts[-1].upper()
         else:
             fail(f"{path.name}: unsupported rule type {kind}")
         if target not in BUILTIN_ACTIONS:
@@ -94,12 +98,21 @@ for path in sorted(MODULES.glob("*.stoverride")):
         if not isinstance(item, str) or len(item.split(None, 1)) < 2:
             fail(f"{path.name}: malformed rewrite entry")
 
+    url_rewrite = http.get("url-rewrite", [])
+    if url_rewrite is None:
+        url_rewrite = []
+    if not isinstance(url_rewrite, list):
+        fail(f"{path.name}: url-rewrite must be a list")
+    for item in url_rewrite:
+        if not isinstance(item, str) or len(item.split(None, 2)) < 3:
+            fail(f"{path.name}: malformed url-rewrite entry")
+
     body_rewrite = http.get("body-rewrite", [])
     if body_rewrite is None:
         body_rewrite = []
     if not isinstance(body_rewrite, list):
         fail(f"{path.name}: body-rewrite must be a list")
-    if not rules and not rewrite and not body_rewrite:
+    if not rules and not rewrite and not url_rewrite and not body_rewrite:
         fail(f"{path.name}: module must contain rules, rewrite, or body-rewrite")
     for item in body_rewrite:
         if not isinstance(item, str) or len(item.split(None, 1)) < 2:
@@ -108,4 +121,4 @@ for path in sorted(MODULES.glob("*.stoverride")):
         if len(tokens) >= 2 and (tokens[1] == "-" or tokens[1].upper().startswith("REJECT")):
             fail(f"{path.name}: response rejection belongs under http.rewrite: {item}")
 
-    print(f"PASS: {path.name} ({len(rules)} rules, {len(mitm)} MITM hosts, {len(body_rewrite)} rewrites)")
+    print(f"PASS: {path.name} ({len(rules)} rules, {len(mitm)} MITM hosts, {len(body_rewrite) + len(url_rewrite)} rewrites)")
