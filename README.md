@@ -16,6 +16,16 @@
 
 [`rules/ClashRules.yaml`](rules/ClashRules.yaml)
 
+测试 AI 兜底时，请使用单独的规则方案文件，不要覆盖正在使用的 `ClashRules` 链接：
+
+[`rules/ClashRules-AI-Fallback.yaml`](rules/ClashRules-AI-Fallback.yaml)
+
+Raw 地址：
+
+`https://raw.githubusercontent.com/Anc9/ios-clash-rules/main/rules/ClashRules-AI-Fallback.yaml`
+
+该测试方案只在日本、新加坡、美国、台湾和英国节点之间自动切换，香港节点不参与 AI 兜底。建议在 ProjectClash 中作为新的规则来源导入，或配合新建配置测试。
+
 本仓库为 Public，可使用固定 Raw URL：
 
 `https://raw.githubusercontent.com/Anc9/ios-clash-rules/main/rules/ClashRules.yaml`
