@@ -72,6 +72,14 @@ GitHub Actions 会自动运行同样的结构检查。它无法替代 iOS 真机
 
 ## HTTPS 去广告模块
 
+支持一个聚合链接一次性导入全部模块：
+
+[`modules/All-HTTPS-AdBlock.stoverride`](modules/All-HTTPS-AdBlock.stoverride)
+
+`https://raw.githubusercontent.com/Anc9/ios-clash-rules/https-module/modules/All-HTTPS-AdBlock.stoverride`
+
+聚合模块包含去广告和全部 App Rewrite。使用聚合模块时不要再同时启用下面的独立模块；独立模块适合单独排查某个 App。
+
 去广告规则合并为一个模块；单个 App 的 Rewrite 独立启用。
 
 ### 域名广告拦截
