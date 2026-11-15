@@ -72,29 +72,34 @@ GitHub Actions 会自动运行同样的结构检查。它无法替代 iOS 真机
 
 ## HTTPS 去广告模块
 
-模块与分流规则分开维护，但同在本仓库。
+模块按职责拆分，可以按需启用。
 
 ### 域名广告拦截
 
 [`modules/Domestic-AdBlock.stoverride`](modules/Domestic-AdBlock.stoverride)
 
-Raw 导入地址：
-
 `https://raw.githubusercontent.com/Anc9/ios-clash-rules/https-module/modules/Domestic-AdBlock.stoverride`
 
-负责远程广告 MRS 和固定广告域名拦截，不包含 HTTPS 响应改写。
+负责远程广告 MRS 和普通广告域名拦截。
 
-### 开屏响应处理
+### 开屏广告域名
 
 [`modules/Splash-AdBlock.stoverride`](modules/Splash-AdBlock.stoverride)
 
-Raw 导入地址：
-
 `https://raw.githubusercontent.com/Anc9/ios-clash-rules/https-module/modules/Splash-AdBlock.stoverride`
 
-负责哔哩哔哩、闲鱼、淘宝和腾讯新闻的精确开屏响应处理。后续单个 App 的非开屏优化会继续使用独立模块。
+负责明确的开屏广告域名拦截，不启用 MITM。
 
-两个模块可以同时启用，也可以单独启用。需要 HTTPS 解密的条目要求证书状态为 Ready；遇到误杀时可以只关闭对应模块，再根据 Activity 日志调整。
+### 单个 App Rewrite
+
+| 模块 | 作用 |
+| --- | --- |
+| [`Bilibili-AppRewrite.stoverride`](modules/Bilibili-AppRewrite.stoverride) | 哔哩哔哩开屏响应和 CDN |
+| [`Goofish-AppRewrite.stoverride`](modules/Goofish-AppRewrite.stoverride) | 闲鱼开屏 JSON |
+| [`Taobao-AppRewrite.stoverride`](modules/Taobao-AppRewrite.stoverride) | 淘宝开屏和广告 JSON |
+| [`QQNews-AppRewrite.stoverride`](modules/QQNews-AppRewrite.stoverride) | 腾讯新闻开屏 JSON |
+
+每个 App Rewrite 模块只处理自己的域名和响应。可以单独启用；需要 HTTPS 解密的条目要求证书状态为 Ready。遇到误杀时只关闭对应 App 模块，再根据 Activity 日志调整。
 
 ## 规则集来源
 
