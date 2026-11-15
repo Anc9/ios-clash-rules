@@ -11,5 +11,5 @@ http:
   mitm:
   - r.inews.qq.com
   rewrite:
+    - ^https?://r\.inews\.qq\.com/(?:getSplash|getFullScreenPic)(?:/|\?|$) - reject-dict
   body-rewrite:
-  - ^https?://r\.inews\.qq\.com/(?:getSplash|getFullScreenPic)(?:/|\?|$) - reject-dict
