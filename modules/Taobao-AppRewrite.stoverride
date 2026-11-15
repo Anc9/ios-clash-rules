@@ -1,0 +1,16 @@
+# ProjectClash iOS Taobao response rewrite module
+# Scope: Taobao splash and advertisement response cleanup only.
+name: 淘宝 App Rewrite
+desc: 拒绝淘宝开屏和广告服务 JSON 响应
+author: Anc9
+category: AdBlock
+version: 1.0.0
+date: '2026-11-15'
+
+http:
+  mitm:
+  - acs.m.taobao.com
+  rewrite:
+  body-rewrite:
+  - ^https?://acs\.m\.taobao\.com/gw/mtop\.taobao\.(?:idlecommerce\.splash\.ads|idle\.home\.welcome)(?:/|\?|$) - reject-dict
+  - ^https?://acs\.m\.taobao\.com/gw/mtop\.alibaba\.advertisementservice\.getadv(?:/|\?|$) - reject-dict
