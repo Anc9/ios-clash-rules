@@ -4,7 +4,7 @@ name: 微博 App Rewrite
 desc: 清理微博开屏、热搜、推荐和部分页面广告响应
 author: Anc9
 category: AdBlock
-version: 1.0.0
+version: 1.0.1
 date: '2026-11-15'
 
 rules:
@@ -43,16 +43,16 @@ http:
   - card.weibo.com
   - weibo.com
   rewrite:
-    - ^https?://bootrealtime\\.uve\\.weibo\\.com/v\\d+/ad/realtime(?:\\?.*)?$ - reject-dict
-    - ^https?://bootpreload\\.uve\\.weibo\\.com/v\\d+/ad/preload(?:\\?.*)?$ - reject-dict
-    - ^https?://(?:sdk|wb)app\\.uve\\.weibo\\.com/(?:interface/sdk/sdkad\\.php|wbapplua/wbpullad\\.lua)(?:\\?.*)?$ - reject-dict
-    - ^https?://sdkapp\\.uve\\.weibo\\.com/interface/sdk/(?:get-lbs-cell-info\\.php|sdkconfig\\.php)(?:\\?.*)?$ - reject-dict
-    - ^https?://(?:m)?api\\.weibo\\.c(?:n|om)/2/logservice/service\\?(?:.*)$ - reject
-    - ^https?://(?:m)?api\\.weibo\\.c(?:n|om)/2/push/info\\?(?:.*)$ - reject-dict
-    - ^https?://(?:m)?api\\.weibo\\.c(?:n|om)/2/push/daily(?:\\?.*)?$ - reject-dict
-    - ^https?://(?:m)?api\\.weibo\\.c(?:n|om)/2/!/(?:huati/discovery_home_bottom_channels|chaohua/discovery/home_bottom/switch|was/finder/searchbarchange)(?:\\?.*)?$ - reject-dict
-    - ^https?://card\\.weibo\\.com/article/m/aj/(?:reward|uvead)\\?(?:.*)$ - reject-dict
-    - ^https?://weibo\\.com/ttarticle/x/m/aj/(?:reward|uvead)\\?(?:.*)$ - reject-dict
+    - ^https?://bootrealtime\.uve\.weibo\.com/v\d+/ad/realtime(?:\?.*)?$ - reject-dict
+    - ^https?://bootpreload\.uve\.weibo\.com/v\d+/ad/preload(?:\?.*)?$ - reject-dict
+    - ^https?://(?:sdk|wb)app\.uve\.weibo\.com/(?:interface/sdk/sdkad\.php|wbapplua/wbpullad\.lua)(?:\?.*)?$ - reject-dict
+    - ^https?://sdkapp\.uve\.weibo\.com/interface/sdk/(?:get-lbs-cell-info\.php|sdkconfig\.php)(?:\?.*)?$ - reject-dict
+    - ^https?://(?:m)?api\.weibo\.c(?:n|om)/2/logservice/service\?(?:.*)$ - reject
+    - ^https?://(?:m)?api\.weibo\.c(?:n|om)/2/push/info\?(?:.*)$ - reject-dict
+    - ^https?://(?:m)?api\.weibo\.c(?:n|om)/2/push/daily(?:\?.*)?$ - reject-dict
+    - ^https?://(?:m)?api\.weibo\.c(?:n|om)/2/!/(?:huati/discovery_home_bottom_channels|chaohua/discovery/home_bottom/switch|was/finder/searchbarchange)(?:\?.*)?$ - reject-dict
+    - ^https?://card\.weibo\.com/article/m/aj/(?:reward|uvead)\?(?:.*)$ - reject-dict
+    - ^https?://weibo\.com/ttarticle/x/m/aj/(?:reward|uvead)\?(?:.*)$ - reject-dict
   body-rewrite:
-    - ^https?://(?:m)?api\\.weibo\\.c(?:n|om)/2/cardlist\\?(?:.*)$ response-jq del(.items[] | select(.category == "group"))
-    - ^https?://weibointl\\.api\\.weibo\\.cn/portal\\.php\\?a=trends&(?:.*)$ response-jq del(.data.banner)
+    - ^https?://(?:m)?api\.weibo\.c(?:n|om)/2/cardlist\?(?:.*)$ response-jq del(.items[] | select(.category == "group"))
+    - ^https?://weibointl\.api\.weibo\.cn/portal\.php\?a=trends&(?:.*)$ response-jq del(.data.banner)
