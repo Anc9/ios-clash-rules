@@ -80,6 +80,16 @@ Raw 导入地址：
 
 `https://raw.githubusercontent.com/Anc9/ios-clash-rules/main/modules/Domestic-AdBlock.stoverride`
 
+Lite 模块（仅高确定性规则和精确响应处理）：
+
+[`modules/Domestic-AdBlock-Lite.stoverride`](modules/Domestic-AdBlock-Lite.stoverride)
+
+测试分支 Raw 地址：
+
+`https://raw.githubusercontent.com/Anc9/ios-clash-rules/https-module/modules/Domestic-AdBlock-Lite.stoverride`
+
+Full 模块保留远程广告 MRS 和更完整的固定规则；Lite 模块不加载远程广告规则集，适合先验证 HTTPS 解密和响应改写是否影响正常业务。两者不要同时启用。
+
 当前模块针对 QQ/腾讯广告接口、淘宝/闲鱼、京东、高德、美团、中国联通、哔哩哔哩等常见广告域名，并对闲鱼、淘宝、腾讯新闻的少量开屏接口做精确拒绝。模块包含一个每天检查一次的远程广告规则集，并补充 B 站开屏响应字段清理和开屏素材 CDN 路径的精确拦截；不加载远程脚本、不包含 VIP 解锁，也不修改正常业务响应。固定的精确广告规则仍保留在模块中。
 
 在 Clash 的「Modules」中添加后，按官方流程安装并信任证书，再打开 HTTPS Decryption。普通域名拦截可直接生效；需要接口级拒绝的条目要求证书状态为 Ready。广告接口会随 App 版本变化，遇到漏网或误杀时应先在 Modules 中关闭模块，再根据 Activity 日志逐项调整。
