@@ -1,0 +1,15 @@
+# ProjectClash iOS Tencent News response rewrite module
+# Scope: Tencent News splash response cleanup only.
+name: 腾讯新闻 App Rewrite
+desc: 拒绝腾讯新闻开屏广告 JSON 响应
+author: Anc9
+category: AdBlock
+version: 1.0.0
+date: '2026-11-15'
+
+http:
+  mitm:
+  - r.inews.qq.com
+  rewrite:
+  body-rewrite:
+  - ^https?://r\.inews\.qq\.com/(?:getSplash|getFullScreenPic)(?:/|\?|$) - reject-dict
