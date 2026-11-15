@@ -1,0 +1,17 @@
+# ProjectClash iOS Bilibili response rewrite module
+# Scope: Bilibili splash response cleanup only.
+name: 哔哩哔哩 App Rewrite
+desc: 清理哔哩哔哩开屏响应字段和开屏 CDN 响应
+author: Anc9
+category: AdBlock
+version: 1.0.0
+date: '2026-11-15'
+
+http:
+  mitm:
+  - app.bilibili.com
+  - upos-sz-static.bilivideo.com
+  rewrite:
+  body-rewrite:
+  - ^https?://app\.bilibili\.com/x/v2/splash/(?:list|show|event/list2)(?:\?.*)?$ response-jq .data |= if type == "object" then with_entries(if .key | IN("show", "event_list") then .value = [] else . end) else . end
+  - ^https?://upos-sz-static\.bilivideo\.com/ssaxcode/\w{2}/\w{2}/\w{32}-1-SPLASH(?:\?.*)?$ - reject-dict
