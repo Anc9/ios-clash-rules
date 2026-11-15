@@ -90,8 +90,9 @@ GitHub Actions 会自动运行同样的结构检查。它无法替代 iOS 真机
 | [`Goofish-AppRewrite.stoverride`](modules/Goofish-AppRewrite.stoverride) | 闲鱼开屏 JSON |
 | [`Taobao-AppRewrite.stoverride`](modules/Taobao-AppRewrite.stoverride) | 淘宝开屏和广告 JSON |
 | [`QQNews-AppRewrite.stoverride`](modules/QQNews-AppRewrite.stoverride) | 腾讯新闻开屏 JSON |
+| [`JD-AppRewrite.stoverride`](modules/JD-AppRewrite.stoverride) | 京东开屏 JSON |
 
-每个 App Rewrite 模块只处理自己的域名和响应。可以单独启用；需要 HTTPS 解密的条目要求证书状态为 Ready。遇到误杀时只关闭对应 App 模块，再根据 Activity 日志调整。
+每个 App Rewrite 模块只处理自己的域名和响应。当前已扩展哔哩哔哩动态/直播、闲鱼页面推荐和京东开屏处理。可以单独启用；需要 HTTPS 解密的条目要求证书状态为 Ready。遇到误杀时只关闭对应 App 模块，再根据 Activity 日志调整。
 
 ## 规则集来源
 
