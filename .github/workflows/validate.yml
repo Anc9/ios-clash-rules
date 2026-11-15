@@ -10,7 +10,9 @@ on:
   pull_request:
     paths:
       - 'rules/**'
+      - 'modules/**'
       - 'scripts/validate.py'
+      - 'scripts/validate_modules.py'
       - '.github/workflows/validate.yml'
 
 jobs:
