@@ -3,7 +3,9 @@ on:
   push:
     paths:
       - 'rules/**'
+      - 'modules/**'
       - 'scripts/validate.py'
+      - 'scripts/validate_modules.py'
       - '.github/workflows/validate.yml'
   pull_request:
     paths:
@@ -21,3 +23,4 @@ jobs:
           python-version: '3.12'
       - run: python -m pip install pyyaml
       - run: python scripts/validate.py
+      - run: python scripts/validate_modules.py
