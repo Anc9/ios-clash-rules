@@ -95,13 +95,13 @@ GitHub Actions 会自动运行同样的结构检查。它无法替代 iOS 真机
 | 模块 | 作用 |
 | --- | --- |
 | [`Bilibili-AppRewrite.stoverride`](modules/Bilibili-AppRewrite.stoverride) | 哔哩哔哩开屏响应和 CDN |
-| [`Weibo-AppRewrite.stoverride`](modules/Weibo-AppRewrite.stoverride) | 微博开屏、热搜和推荐响应 |
+| [`Weibo-AppRewrite.stoverride`](modules/Weibo-AppRewrite.stoverride) | 微博开屏、信息流广告和仅保留热搜的发现页 |
 | [`Goofish-AppRewrite.stoverride`](modules/Goofish-AppRewrite.stoverride) | 闲鱼开屏 JSON |
 | [`Taobao-AppRewrite.stoverride`](modules/Taobao-AppRewrite.stoverride) | 淘宝开屏和广告 JSON |
 | [`QQNews-AppRewrite.stoverride`](modules/QQNews-AppRewrite.stoverride) | 腾讯新闻开屏 JSON |
 | [`JD-AppRewrite.stoverride`](modules/JD-AppRewrite.stoverride) | 京东开屏 JSON |
 
-每个 App Rewrite 模块只处理自己的域名和响应。当前已扩展哔哩哔哩动态/直播、闲鱼页面推荐、京东开屏和微博响应处理。可以单独启用；需要 HTTPS 解密的条目要求证书状态为 Ready。遇到误杀时只关闭对应 App 模块，再根据 Activity 日志调整。
+每个 App Rewrite 模块只处理自己的域名和响应。当前已扩展哔哩哔哩动态/直播、闲鱼页面推荐、京东开屏、微博信息流广告过滤和发现页热搜保留。微博发现页会保留“微博热搜”，并移除榜单、同城、超话、常看的人、热门话题和热门视频模块。可以单独启用；需要 HTTPS 解密的条目要求证书状态为 Ready。遇到误杀时只关闭对应 App 模块，再根据 Activity 日志调整。
 
 ## 规则集来源
 

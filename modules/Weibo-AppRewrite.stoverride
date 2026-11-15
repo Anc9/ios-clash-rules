@@ -4,7 +4,7 @@ name: 微博 App Rewrite
 desc: 清理微博开屏、热搜、推荐和部分页面广告响应
 author: Anc9
 category: AdBlock
-version: 1.0.1
+version: 1.0.2
 date: '2026-11-15'
 
 rules:
@@ -56,3 +56,5 @@ http:
   body-rewrite:
     - ^https?://(?:m)?api\.weibo\.c(?:n|om)/2/cardlist\?(?:.*)$ response-jq del(.items[] | select(.category == "group"))
     - ^https?://weibointl\.api\.weibo\.cn/portal\.php\?a=trends&(?:.*)$ response-jq del(.data.banner)
+    - ^https?://(?:api\.weibo\.cn|api\.weibo\.com|mapi\.weibo\.com)/2/(?:groups/timeline|statuses/(?:unread|unread_hot_timeline|unread_friends_timeline|friends/timeline|friends_timeline|container_timeline(?:_hot|_unread)?))(?:\?.*)?$ response-jq .statuses |= if type == "array" then map(select((.mblogtype // 0) != 1 and ((.mblogtypename // "") != "广告") and ((.mblogtypename // "") != "热推") and (((.promotion // {}).type // "") != "ad") and (((.page_info // {}).actionlog.source // "") != "ad") and (((.content_auth_info // {}).content_auth_title // "") != "广告"))) else . end | .advertises = [] | .ad = [] | .trends = []
+    - ^https?://(?:api\.weibo\.cn|api\.weibo\.com|mapi\.weibo\.com)/2/flowpage(?:\?.*)?$ response-jq .items |= if type == "array" then map(select(.itemId == "hotword" or (.type == "text" and ((.text.content // "") | contains("实时热点"))))) else . end | del(.channelInfo)
