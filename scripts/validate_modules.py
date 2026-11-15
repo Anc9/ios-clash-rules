@@ -81,7 +81,10 @@ for path in sorted(MODULES.glob("*.stoverride")):
     mitm = http.get("mitm", [])
     if not isinstance(mitm, list) or len(mitm) != len(set(mitm)):
         fail(f"{path.name}: http.mitm must be a unique list")
-    body_rewrite = http.get("rewrite", {}).get("body-rewrite", [])
+    rewrite = http.get("rewrite")
+    body_rewrite = http.get("body-rewrite", [])
+    if isinstance(rewrite, dict):
+        body_rewrite = rewrite.get("body-rewrite", body_rewrite)
     if not isinstance(body_rewrite, list) or not body_rewrite:
         fail(f"{path.name}: body-rewrite must be a non-empty list")
     for item in body_rewrite:
