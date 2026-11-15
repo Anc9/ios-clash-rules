@@ -78,17 +78,9 @@ GitHub Actions 会自动运行同样的结构检查。它无法替代 iOS 真机
 
 Raw 导入地址：
 
-`https://raw.githubusercontent.com/Anc9/ios-clash-rules/main/modules/Domestic-AdBlock.stoverride`
+`https://raw.githubusercontent.com/Anc9/ios-clash-rules/https-module/modules/Domestic-AdBlock.stoverride`
 
-Lite 模块（仅高确定性规则和精确响应处理）：
-
-[`modules/Domestic-AdBlock-Lite.stoverride`](modules/Domestic-AdBlock-Lite.stoverride)
-
-测试分支 Raw 地址：
-
-`https://raw.githubusercontent.com/Anc9/ios-clash-rules/https-module/modules/Domestic-AdBlock-Lite.stoverride`
-
-Full 模块保留远程广告 MRS 和更完整的固定规则；Lite 模块不加载远程广告规则集，适合先验证 HTTPS 解密和响应改写是否影响正常业务。两者不要同时启用。
+本分支维护一个个人使用的完整模块，包含远程广告 MRS、固定广告规则和精确响应改写。优化版收紧了 MITM 主机范围，并让 B 站响应处理在返回结构变化时保持原响应。
 
 当前模块针对 QQ/腾讯广告接口、淘宝/闲鱼、京东、高德、美团、中国联通、哔哩哔哩等常见广告域名，并对闲鱼、淘宝、腾讯新闻的少量开屏接口做精确拒绝。模块包含一个每天检查一次的远程广告规则集，并补充 B 站开屏响应字段清理和开屏素材 CDN 路径的精确拦截；不加载远程脚本、不包含 VIP 解锁，也不修改正常业务响应。固定的精确广告规则仍保留在模块中。
 
