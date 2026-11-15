@@ -1,25 +1,13 @@
-# ProjectClash iOS splash ad response module
-# Scope: precise splash response rewrites only; no domain blocking or remote rule sets.
-name: iOS 开屏广告处理
-desc: 针对哔哩哔哩、闲鱼、淘宝和腾讯新闻的精确开屏响应处理
+# ProjectClash iOS splash ad domain module
+# Scope: splash ad domains only; app response rewrites live in per-app modules.
+name: iOS 开屏广告域名拦截
+desc: 拦截明确的开屏广告域名，不包含 MITM 或 App 响应改写
 author: Anc9
 category: AdBlock
 version: 1.0.0
 date: '2026-11-15'
 
-http:
-  mitm:
-  - acs.m.goofish.com
-  - g-acs.m.goofish.com
-  - acs.m.taobao.com
-  - r.inews.qq.com
-  - app.bilibili.com
-  - upos-sz-static.bilivideo.com
-  rewrite:
-  body-rewrite:
-  - ^https?://app\.bilibili\.com/x/v2/splash/(?:list|show|event/list2)(?:\?.*)?$ response-jq .data |= if type == "object" then with_entries(if .key | IN("show", "event_list") then .value = [] else . end) else . end
-  - ^https?://(?:g-)?acs\.m\.goofish\.com/gw/mtop\.taobao\.idlecommerce\.splash\.ads(?:/|\?|$) - reject-dict
-  - ^https?://acs\.m\.taobao\.com/gw/mtop\.taobao\.(?:idlecommerce\.splash\.ads|idle\.home\.welcome)(?:/|\?|$) - reject-dict
-  - ^https?://acs\.m\.taobao\.com/gw/mtop\.alibaba\.advertisementservice\.getadv(?:/|\?|$) - reject-dict
-  - ^https?://r\.inews\.qq\.com/(?:getSplash|getFullScreenPic)(?:/|\?|$) - reject-dict
-  - ^https?://upos-sz-static\.bilivideo\.com/ssaxcode/\w{2}/\w{2}/\w{32}-1-SPLASH(?:\?.*)?$ - reject-dict
+rules:
+- DOMAIN,ipm.atm.youku.com,REJECT
+- DOMAIN,splashqqlive.gtimg.com,REJECT
+- DOMAIN,poplayer.template.alibaba.com,REJECT
