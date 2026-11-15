@@ -1,5 +1,11 @@
 # 变更记录
 
+## HTTPS module 0.1 — 2026-11-15
+
+- 新增 `Domestic-AdBlock-Lite.stoverride`，只保留高确定性广告域名和精确响应改写。
+- Full 模块继续保留远程广告 MRS 和完整固定规则。
+- 新增模块结构校验，并让 GitHub Actions 在模块或规则变更时执行。
+
 ## v2.2.3 — 2026-11-15
 
 - 新增独立的 `ClashRules-AI-Fallback.yaml` 测试方案。
