@@ -1,0 +1,16 @@
+# ProjectClash iOS Goofish response rewrite module
+# Scope: Goofish splash response cleanup only.
+name: 闲鱼 App Rewrite
+desc: 拒绝闲鱼开屏广告 JSON 响应
+author: Anc9
+category: AdBlock
+version: 1.0.0
+date: '2026-11-15'
+
+http:
+  mitm:
+  - acs.m.goofish.com
+  - g-acs.m.goofish.com
+  rewrite:
+  body-rewrite:
+  - ^https?://(?:g-)?acs\.m\.goofish\.com/gw/mtop\.taobao\.idlecommerce\.splash\.ads(?:/|\?|$) - reject-dict
