@@ -1,11 +1,11 @@
 # 变更记录
 
-## HTTPS module 0.3 — 2026-11-15
+## HTTPS module 0.4 — 2026-11-15
 
-- 将域名广告拦截与开屏响应处理拆成两个可独立启用的模块。
-- `Domestic-AdBlock.stoverride` 只负责远程 MRS 和固定广告域名。
-- 新增 `Splash-AdBlock.stoverride`，集中处理开屏响应。
-- 保留模块结构校验和 GitHub Actions 检查。
+- 将开屏广告域名拦截与 App Rewrite 继续拆分。
+- `Splash-AdBlock.stoverride` 只负责开屏广告域名。
+- 新增哔哩哔哩、闲鱼、淘宝、腾讯新闻四个独立 App Rewrite 模块。
+- 每个 App 模块只声明自己的 MITM 主机和响应规则。
 
 ## v2.2.3 — 2026-11-15
 
