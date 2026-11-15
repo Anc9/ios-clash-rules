@@ -52,8 +52,10 @@ for path in sorted(MODULES.glob("*.stoverride")):
             fail(f"{path.name}: provider {name} must use HTTPS")
 
     rules = config.get("rules", [])
-    if not isinstance(rules, list) or not rules:
-        fail(f"{path.name}: rules must be a non-empty list")
+    if rules is None:
+        rules = []
+    if not isinstance(rules, list):
+        fail(f"{path.name}: rules must be a list")
     if len(rules) != len(set(rules)):
         fail(f"{path.name}: duplicate rules")
 
@@ -76,6 +78,8 @@ for path in sorted(MODULES.glob("*.stoverride")):
             fail(f"{path.name}: module rule target must be a built-in action: {target}")
 
     http = config.get("http", {})
+    if http is None:
+        http = {}
     if not isinstance(http, dict):
         fail(f"{path.name}: http must be a mapping")
     mitm = http.get("mitm", [])
@@ -85,8 +89,12 @@ for path in sorted(MODULES.glob("*.stoverride")):
     body_rewrite = http.get("body-rewrite", [])
     if isinstance(rewrite, dict):
         body_rewrite = rewrite.get("body-rewrite", body_rewrite)
-    if not isinstance(body_rewrite, list) or not body_rewrite:
-        fail(f"{path.name}: body-rewrite must be a non-empty list")
+    if body_rewrite is None:
+        body_rewrite = []
+    if not isinstance(body_rewrite, list):
+        fail(f"{path.name}: body-rewrite must be a list")
+    if not rules and not body_rewrite:
+        fail(f"{path.name}: module must contain rules or body-rewrite")
     for item in body_rewrite:
         if not isinstance(item, str) or len(item.split(None, 1)) < 2:
             fail(f"{path.name}: malformed body-rewrite entry")
