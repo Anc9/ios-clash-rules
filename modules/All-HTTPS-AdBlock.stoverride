@@ -61,27 +61,27 @@ http:
   - r.inews.qq.com
   - api.m.jd.com
   rewrite:
+    - ^https?://upos-sz-static\.bilivideo\.com/ssaxcode/\w{2}/\w{2}/\w{32}-1-SPLASH(?:\?.*)?$ - reject-dict
+    - ^https?://(?:g-)?acs\.m\.goofish\.com/gw/mtop\.taobao\.idlecommerce\.splash\.ads(?:/|\?|$) - reject-dict
+    - ^https?://(?:g-)?acs\.m\.goofish\.com/gw/mtop\.taobao\.idlemtopsearch\.item\.search\.activate/2\.0 - reject-dict
+    - ^https?://(?:g-)?acs\.m\.goofish\.com/gw/mtop\.taobao\.idlemtopsearch\.search\.discover/1\.0 - reject-dict
+    - ^https?://(?:g-)?acs\.m\.goofish\.com/gw/mtop\.taobao\.idle\.item\.resell\.recommendorhotcate/1\.0 - reject-dict
+    - ^https?://(?:g-)?acs\.m\.goofish\.com/gw/mtop\.taobao\.idlehome\.idle\.coin\.nextfresh/1\.0 - reject-dict
+    - ^https?://(?:g-)?acs\.m\.goofish\.com/gw/mtop\.taobao\.idle\.item\.buy\.feeds(?:/|\?|$) - reject-dict
+    - ^https?://(?:g-)?acs\.m\.goofish\.com/gw/mtop\.taobao\.idle\.playboy\.recommend/1\.0 - reject
+    - ^https?://acs\.m\.taobao\.com/gw/mtop\.taobao\.(?:idlecommerce\.splash\.ads|idle\.home\.welcome)(?:/|\?|$) - reject-dict
+    - ^https?://acs\.m\.taobao\.com/gw/mtop\.alibaba\.advertisementservice\.getadv(?:/|\?|$) - reject-dict
+    - ^https?://r\.inews\.qq\.com/(?:getSplash|getFullScreenPic)(?:/|\?|$) - reject-dict
   body-rewrite:
-  - ^https?://app\.bilibili\.com/x/v2/splash/(?:list|show|event/list2)(?:\?.*)?$ response-jq .data |= if type == "object" then with_entries(if .key | IN("show", "event_list") then .value = [] else . end) else . end
-  - ^https?://upos-sz-static\.bilivideo\.com/ssaxcode/\w{2}/\w{2}/\w{32}-1-SPLASH(?:\?.*)?$ - reject-dict
-  - ^https?://api\.live\.bilibili\.com/xlive/app-room/v1/index/getInfoByRoom(?:\?.*)?$ response-jq .data.activity_banner_info = null
-  - ^https?://api\.vc\.bilibili\.com/dynamic_svr/v1/dynamic_svr/dynamic_(?:history|new)(?:\?.*)?$ response-jq .data.cards |= map(select(((.card // "") | contains("ad_ctx")) | not))
-  - ^https?://(?:g-)?acs\.m\.goofish\.com/gw/mtop\.taobao\.idlecommerce\.splash\.ads(?:/|\?|$) - reject-dict
-  - ^https?://(?:g-)?acs\.m\.goofish\.com/gw/mtop\.taobao\.idlemtopsearch\.item\.search\.activate/2\.0 - reject-dict
-  - ^https?://(?:g-)?acs\.m\.goofish\.com/gw/mtop\.taobao\.idlemtopsearch\.search\.discover/1\.0 - reject-dict
-  - ^https?://(?:g-)?acs\.m\.goofish\.com/gw/mtop\.taobao\.idle\.item\.resell\.recommendorhotcate/1\.0 - reject-dict
-  - ^https?://(?:g-)?acs\.m\.goofish\.com/gw/mtop\.taobao\.idlehome\.idle\.coin\.nextfresh/1\.0 - reject-dict
-  - ^https?://(?:g-)?acs\.m\.goofish\.com/gw/mtop\.taobao\.idle\.item\.buy\.feeds(?:/|\?|$) - reject-dict
-  - ^https?://(?:g-)?acs\.m\.goofish\.com/gw/mtop\.taobao\.idle\.playboy\.recommend/1\.0 - reject
-  - ^https?://(?:g-)?acs\.m\.goofish\.com/gw/mtop\.taobao\.idlemtopsearch\.search\.shade(?:/|\?|$) response-jq del(.data)
-  - ^https?://(?:g-)?acs\.m\.goofish\.com/gw/mtop\.taobao\.idle\.user\.strategy\.list(?:/|\?|$) response-jq del(.data)
-  - ^https?://(?:g-)?acs\.m\.goofish\.com/gw/mtop\.taobao\.idle\.group\.myself\.banner(?:/|\?|$) response-jq .data.bannerList = []
-  - ^https?://(?:g-)?acs\.m\.goofish\.com/gw/mtop\.taobao\.idle\.playboy\.recommend/2\.0 response-jq .data.recommends = [] | .data.items = [] | .data.next = false
-  - ^https?://(?:g-)?acs\.m\.goofish\.com/gw/mtop\.taobao\.idle\.item\.recommend\.list(?:/|\?|$) response-jq .data.cardList = []
-  - ^https?://(?:g-)?acs\.m\.goofish\.com/gw/mtop\.taobao\.idle\.fun\.follow\.often\.visit(?:/|\?|$) response-jq .data.sections = []
-  - ^https?://(?:g-)?acs\.m\.goofish\.com/gw/mtop\.taobao\.idle\.circle\.myself\.banner/1\.0 response-jq .data.bannerList = []
-  - ^https?://(?:g-)?acs\.m\.goofish\.com/gw/mtop\.taobao\.idle\.circle\.visited/1\.0 response-jq .data.visitedCircleList = []
-  - ^https?://acs\.m\.taobao\.com/gw/mtop\.taobao\.(?:idlecommerce\.splash\.ads|idle\.home\.welcome)(?:/|\?|$) - reject-dict
-  - ^https?://acs\.m\.taobao\.com/gw/mtop\.alibaba\.advertisementservice\.getadv(?:/|\?|$) - reject-dict
-  - ^https?://r\.inews\.qq\.com/(?:getSplash|getFullScreenPic)(?:/|\?|$) - reject-dict
-  - ^https?://api\.m\.jd\.com/client\.action\?functionId=start(?:&.*)?$ response-jq . |= if (.images | type) == "array" then (.images |= map(if type == "array" then map(if has("showTimes") then .showTimes = 0 | .onlineTime = "2030-12-24 00:00:00" | .referralsTime = "2030-12-25 00:00:00" | .time = 0 else . end) else . end) | .countdown = 100 | .showTimesDaily = 0) else . end
+    - ^https?://app\.bilibili\.com/x/v2/splash/(?:list|show|event/list2)(?:\?.*)?$ response-jq .data |= if type == "object" then with_entries(if .key | IN("show", "event_list") then .value = [] else . end) else . end
+    - ^https?://api\.live\.bilibili\.com/xlive/app-room/v1/index/getInfoByRoom(?:\?.*)?$ response-jq .data.activity_banner_info = null
+    - ^https?://api\.vc\.bilibili\.com/dynamic_svr/v1/dynamic_svr/dynamic_(?:history|new)(?:\?.*)?$ response-jq .data.cards |= map(select(((.card // "") | contains("ad_ctx")) | not))
+    - ^https?://(?:g-)?acs\.m\.goofish\.com/gw/mtop\.taobao\.idlemtopsearch\.search\.shade(?:/|\?|$) response-jq del(.data)
+    - ^https?://(?:g-)?acs\.m\.goofish\.com/gw/mtop\.taobao\.idle\.user\.strategy\.list(?:/|\?|$) response-jq del(.data)
+    - ^https?://(?:g-)?acs\.m\.goofish\.com/gw/mtop\.taobao\.idle\.group\.myself\.banner(?:/|\?|$) response-jq .data.bannerList = []
+    - ^https?://(?:g-)?acs\.m\.goofish\.com/gw/mtop\.taobao\.idle\.playboy\.recommend/2\.0 response-jq .data.recommends = [] | .data.items = [] | .data.next = false
+    - ^https?://(?:g-)?acs\.m\.goofish\.com/gw/mtop\.taobao\.idle\.item\.recommend\.list(?:/|\?|$) response-jq .data.cardList = []
+    - ^https?://(?:g-)?acs\.m\.goofish\.com/gw/mtop\.taobao\.idle\.fun\.follow\.often\.visit(?:/|\?|$) response-jq .data.sections = []
+    - ^https?://(?:g-)?acs\.m\.goofish\.com/gw/mtop\.taobao\.idle\.circle\.myself\.banner/1\.0 response-jq .data.bannerList = []
+    - ^https?://(?:g-)?acs\.m\.goofish\.com/gw/mtop\.taobao\.idle\.circle\.visited/1\.0 response-jq .data.visitedCircleList = []
+    - ^https?://api\.m\.jd\.com/client\.action\?functionId=start(?:&.*)?$ response-jq . |= if (.images | type) == "array" then (.images |= map(if type == "array" then map(if has("showTimes") then .showTimes = 0 | .onlineTime = "2030-12-24 00:00:00" | .referralsTime = "2030-12-25 00:00:00" | .time = 0 else . end) else . end) | .countdown = 100 | .showTimesDaily = 0) else . end
