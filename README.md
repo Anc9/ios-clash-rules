@@ -72,7 +72,9 @@ GitHub Actions 会自动运行同样的结构检查。它无法替代 iOS 真机
 
 ## HTTPS 去广告模块
 
-模块与分流规则分开维护，但同在本仓库：
+模块与分流规则分开维护，但同在本仓库。
+
+### 域名广告拦截
 
 [`modules/Domestic-AdBlock.stoverride`](modules/Domestic-AdBlock.stoverride)
 
@@ -80,11 +82,19 @@ Raw 导入地址：
 
 `https://raw.githubusercontent.com/Anc9/ios-clash-rules/https-module/modules/Domestic-AdBlock.stoverride`
 
-本分支维护一个个人使用的完整模块，包含远程广告 MRS、固定广告规则和精确响应改写。优化版收紧了 MITM 主机范围，并让 B 站响应处理在返回结构变化时保持原响应。
+负责远程广告 MRS 和固定广告域名拦截，不包含 HTTPS 响应改写。
 
-当前模块针对 QQ/腾讯广告接口、淘宝/闲鱼、京东、高德、美团、中国联通、哔哩哔哩等常见广告域名，并对闲鱼、淘宝、腾讯新闻的少量开屏接口做精确拒绝。模块包含一个每天检查一次的远程广告规则集，并补充 B 站开屏响应字段清理和开屏素材 CDN 路径的精确拦截；不加载远程脚本、不包含 VIP 解锁，也不修改正常业务响应。固定的精确广告规则仍保留在模块中。
+### 开屏响应处理
 
-在 Clash 的「Modules」中添加后，按官方流程安装并信任证书，再打开 HTTPS Decryption。普通域名拦截可直接生效；需要接口级拒绝的条目要求证书状态为 Ready。广告接口会随 App 版本变化，遇到漏网或误杀时应先在 Modules 中关闭模块，再根据 Activity 日志逐项调整。
+[`modules/Splash-AdBlock.stoverride`](modules/Splash-AdBlock.stoverride)
+
+Raw 导入地址：
+
+`https://raw.githubusercontent.com/Anc9/ios-clash-rules/https-module/modules/Splash-AdBlock.stoverride`
+
+负责哔哩哔哩、闲鱼、淘宝和腾讯新闻的精确开屏响应处理。后续单个 App 的非开屏优化会继续使用独立模块。
+
+两个模块可以同时启用，也可以单独启用。需要 HTTPS 解密的条目要求证书状态为 Ready；遇到误杀时可以只关闭对应模块，再根据 Activity 日志调整。
 
 ## 规则集来源
 
