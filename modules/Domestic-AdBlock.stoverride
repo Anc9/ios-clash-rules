@@ -18,6 +18,9 @@ rule-providers:
 
 rules:
 - RULE-SET,domestic-ads,REJECT
+- DOMAIN,ipm.atm.youku.com,REJECT
+- DOMAIN,splashqqlive.gtimg.com,REJECT
+- DOMAIN,poplayer.template.alibaba.com,REJECT
 - DOMAIN,df.tanx.com,REJECT
 - DOMAIN,bdlog.tanx.com,REJECT
 - DOMAIN,ssp-track.adn-plus.com.cn,REJECT
