@@ -20,7 +20,6 @@ rules:
 - RULE-SET,domestic-ads,REJECT
 - DOMAIN,df.tanx.com,REJECT
 - DOMAIN,bdlog.tanx.com,REJECT
-- DOMAIN,ipm.atm.youku.com,REJECT
 - DOMAIN,ssp-track.adn-plus.com.cn,REJECT
 - DOMAIN,adx-track.adn-plus.com.cn,REJECT
 - DOMAIN,statics.adanxing.com,REJECT
@@ -30,7 +29,6 @@ rules:
 - DOMAIN,sdk.e.qq.com,REJECT
 - DOMAIN,sdkconfig.e.qq.com,REJECT
 - DOMAIN,adsmind.gdtimg.com,REJECT
-- DOMAIN,splashqqlive.gtimg.com,REJECT
 - DOMAIN,ads-union.jd.com,REJECT
 - DOMAIN,jzt.jd.com,REJECT
 - DOMAIN,c-nfa.jd.com,REJECT
@@ -43,7 +41,6 @@ rules:
 - DOMAIN,api-access.pangolin-sdk-toutiao.com,REJECT
 - DOMAIN,api-access.pangolin-sdk-toutiao1.com,REJECT
 - DOMAIN,api-access.pangolin-sdk-toutiao-b.com,REJECT
-- DOMAIN,poplayer.template.alibaba.com,REJECT
 - DOMAIN,data.bilibili.com,REJECT
 - DOMAIN,log.bilibili.com,REJECT
 
