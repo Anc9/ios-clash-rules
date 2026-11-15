@@ -85,7 +85,15 @@ for path in sorted(MODULES.glob("*.stoverride")):
     mitm = http.get("mitm", [])
     if not isinstance(mitm, list) or len(mitm) != len(set(mitm)):
         fail(f"{path.name}: http.mitm must be a unique list")
-    rewrite = http.get("rewrite")
+    rewrite = http.get("rewrite", [])
+    if rewrite is None:
+        rewrite = []
+    if not isinstance(rewrite, list):
+        fail(f"{path.name}: rewrite must be a list")
+    for item in rewrite:
+        if not isinstance(item, str) or len(item.split(None, 1)) < 2:
+            fail(f"{path.name}: malformed rewrite entry")
+
     body_rewrite = http.get("body-rewrite", [])
     if isinstance(rewrite, dict):
         body_rewrite = rewrite.get("body-rewrite", body_rewrite)
@@ -98,5 +106,8 @@ for path in sorted(MODULES.glob("*.stoverride")):
     for item in body_rewrite:
         if not isinstance(item, str) or len(item.split(None, 1)) < 2:
             fail(f"{path.name}: malformed body-rewrite entry")
+        tokens = item.split()
+        if len(tokens) >= 2 and (tokens[1] == "-" or tokens[1].upper().startswith("REJECT")):
+            fail(f"{path.name}: response rejection belongs under http.rewrite: {item}")
 
     print(f"PASS: {path.name} ({len(rules)} rules, {len(mitm)} MITM hosts, {len(body_rewrite)} rewrites)")
