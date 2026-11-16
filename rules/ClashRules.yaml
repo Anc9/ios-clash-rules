@@ -1,5 +1,5 @@
 # ClashRules / iOS 分流规则
-# 版本: v2.2.7
+# 版本: v2.2.6
 # 作者: Anc9 (GitHub: https://github.com/Anc9)
 # 更新日期: 2026-11-16
 # 适用客户端: ProjectClash / Clash-Client (Mihomo)
@@ -367,7 +367,6 @@ rules:
 - RULE-SET,cm-privateip,DIRECT,no-resolve
 - DOMAIN-SUFFIX,abchina.com.cn,DIRECT
 - DOMAIN-SUFFIX,abchina.com,DIRECT
-- DOMAIN,msmp.abchina.com.cn,REJECT-DROP,no-resolve
 - DOMAIN-SUFFIX,alipay.com,DIRECT
 - DOMAIN-SUFFIX,alipayobjects.com,DIRECT
 - DOMAIN-SUFFIX,tenpay.com,DIRECT
