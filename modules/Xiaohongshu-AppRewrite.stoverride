@@ -1,0 +1,25 @@
+# ProjectClash iOS Xiaohongshu response rewrite module
+# Scope: remove Xiaohongshu information-feed advertisements only.
+name: 小红书 App Rewrite
+desc: 清理小红书发现页和信息流中的推广内容；保留普通笔记
+author: Anc9
+category: AdBlock
+version: 1.0.0
+date: '2026-11-17'
+
+rules:
+- DOMAIN,referee.xiaohongshu.com,REJECT
+
+http:
+  mitm:
+  - edith.xiaohongshu.com
+  - rec.xiaohongshu.com
+  - www.xiaohongshu.com
+  - referee.xiaohongshu.com
+  rewrite:
+    - ^https?://www\.xiaohongshu\.com/api/sns/v\d+/(?:tag/ads_engage|ads/(?:apple/record|resource))(?:\?.*)?$ - reject-dict
+    - ^https?://referee\.xiaohongshu\.com/v\d+/stateReport(?:\?.*)?$ - reject-dict
+  body-rewrite:
+    - ^https?://(?:edith|rec|www)\.xiaohongshu\.com/api/sns/v6/homefeed(?:\?.*)?$ response-jq .data |= if type == "array" then map(select((.is_ads // false) != true and (.ads_info == null) and (.card_icon == null) and (((.note_attributes // []) | index("goods")) == null))) else . end
+    - ^https?://edith\.xiaohongshu\.com/api/sns/v[1-5]/homefeed\?(?:.*)$ response-jq .data |= if type == "object" then with_entries(select((.value.is_ads // false) != true and (.value.ads_info == null) and (.value.card_icon == null))) elif type == "array" then map(select((.is_ads // false) != true and (.ads_info == null) and (.card_icon == null))) else . end
+    - ^https?://(?:edith|rec|www)\.xiaohongshu\.com/api/sns/v\d+/followfeed(?:\?.*)?$ response-jq .data.items |= if type == "array" then map(select((.is_ads // false) != true and (.ads_info == null) and (.card_icon == null))) else . end
