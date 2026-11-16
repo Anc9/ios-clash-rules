@@ -7,6 +7,12 @@
 
 # 变更记录
 
+## HTTPS module 0.9 — 2026-11-17
+
+- 新增小红书独立 Rewrite 模块，过滤发现页信息流中的推广项。
+- 同步加入 HTTPS 聚合模块；小红书模块标记为 experimental，便于实机验证。
+
+
 ## v2.2.7 — 2026-11-16
 
 - 增加 `msmp.abchina.com.cn` 子域名的 `REJECT` 拦截规则。
