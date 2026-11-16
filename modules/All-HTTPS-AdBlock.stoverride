@@ -4,8 +4,8 @@ name: iOS 去广告与 App Rewrite 全量模块
 desc: 合并域名广告拦截、开屏域名和各 App 响应改写；与独立模块二选一
 author: Anc9
 category: AdBlock
-version: 1.0.9
-date: '2026-11-16'
+version: 1.0.10
+date: '2026-11-17'
 
 rule-providers:
   domestic-ads:
@@ -67,6 +67,7 @@ rules:
 - DOMAIN-SUFFIX,tui.weibo.com,REJECT
 - DOMAIN-SUFFIX,ad.weibo.com,REJECT
 - DOMAIN,datacollection.uve.weibo.com,REJECT
+- DOMAIN,referee.xiaohongshu.com,REJECT
 - DOMAIN,adpinpai.video.weibocdn.com,REJECT
 
 
@@ -95,6 +96,10 @@ http:
   - m.ctrip.com
   - dimg04.c-ctrip.com
   - api.zhihu.com
+  - edith.xiaohongshu.com
+  - rec.xiaohongshu.com
+  - www.xiaohongshu.com
+  - referee.xiaohongshu.com
   rewrite:
     - ^https?://upos-sz-static\.bilivideo\.com/ssaxcode/\w{2}/\w{2}/\w{32}-1-SPLASH(?:\?.*)?$ - reject-dict
     - ^https?://(?:g-)?acs\.m\.goofish\.com/gw/mtop\.taobao\.idlecommerce\.splash\.ads(?:/|\?|$) - reject-dict
@@ -112,6 +117,8 @@ http:
     - ^https?://dimg04\.c-ctrip\.com/images/[A-Za-z0-9]{21}\.(?:jpg|png)(?:\?.*)?$ - reject-img
     - ^https?://api\.zhihu\.com/commercial_api/(?:launch_v2|real_time_launch_v2)(?:\?.*)?$ - reject-dict
     - ^https?://api\.zhihu\.com/(?:launch|real_time)(?:\?.*)?$ - reject-dict
+    - ^https?://www\.xiaohongshu\.com/api/sns/v\d+/(?:tag/ads_engage|ads/(?:apple/record|resource))(?:\?.*)?$ - reject-dict
+    - ^https?://referee\.xiaohongshu\.com/v\d+/stateReport(?:\?.*)?$ - reject-dict
     - ^https?://bootrealtime\.uve\.weibo\.com/v\d+/ad/realtime(?:\?.*)?$ - reject-dict
     - ^https?://bootpreload\.uve\.weibo\.com/v\d+/ad/preload(?:\?.*)?$ - reject-dict
     - ^https?://(?:sdk|wb)app\.uve\.weibo\.com/(?:interface/sdk/sdkad\.php|wbapplua/wbpullad\.lua)(?:\?.*)?$ - reject-dict
@@ -139,3 +146,6 @@ http:
     - ^https?://weibointl\.api\.weibo\.cn/portal\.php\?a=trends&(?:.*)$ response-jq .data.order = ["search_topic"] | del(.data.banner)
     - ^https?://(?:api\.weibo\.cn|api\.weibo\.com|mapi\.weibo\.com)/2/(?:groups/timeline|statuses/(?:unread|unread_hot_timeline|unread_friends_timeline|friends/timeline|friends_timeline|container_timeline(?:_hot|_unread)?))(?:\?.*)?$ response-jq .statuses |= if type == "array" then map(select((.mblogtype // 0) != 1 and ((.mblogtypename // "") != "广告") and ((.mblogtypename // "") != "热推") and (((.promotion // {}).type // "") != "ad") and (((.page_info // {}).actionlog.source // "") != "ad") and (((.content_auth_info // {}).content_auth_title // "") != "广告"))) else . end | .advertises = [] | .ad = [] | .trends = []
     - ^https?://(?:api\.weibo\.cn|api\.weibo\.com|mapi\.weibo\.com)/2/flowpage(?:\?.*)?$ response-jq .items |= if type == "array" then map(select(.itemId == "hotword" or (.type == "text" and ((.text.content // "") | contains("实时热点"))))) else . end | del(.channelInfo)
+    - ^https?://(?:edith|rec|www)\.xiaohongshu\.com/api/sns/v6/homefeed(?:\?.*)?$ response-jq .data |= if type == "array" then map(select((.is_ads // false) != true and (.ads_info == null) and (.card_icon == null) and (((.note_attributes // []) | index("goods")) == null))) else . end
+    - ^https?://edith\.xiaohongshu\.com/api/sns/v[1-5]/homefeed\?(?:.*)$ response-jq .data |= if type == "object" then with_entries(select((.value.is_ads // false) != true and (.value.ads_info == null) and (.value.card_icon == null))) elif type == "array" then map(select((.is_ads // false) != true and (.ads_info == null) and (.card_icon == null))) else . end
+    - ^https?://(?:edith|rec|www)\.xiaohongshu\.com/api/sns/v\d+/followfeed(?:\?.*)?$ response-jq .data.items |= if type == "array" then map(select((.is_ads // false) != true and (.ads_info == null) and (.card_icon == null))) else . end
