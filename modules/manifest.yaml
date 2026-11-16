@@ -3,7 +3,7 @@ schema: 1
 # Stable source paths are kept for existing Raw subscriptions.
 aggregate:
   path: modules/All-HTTPS-AdBlock.stoverride
-  version: 1.0.9
+  version: 1.0.10
   includes:
     - modules/Domestic-AdBlock.stoverride
     - modules/Bilibili-AppRewrite.stoverride
@@ -12,6 +12,7 @@ aggregate:
     - modules/QQNews-AppRewrite.stoverride
     - modules/Taobao-AppRewrite.stoverride
     - modules/Weibo-AppRewrite.stoverride
+    - modules/Xiaohongshu-AppRewrite.stoverride
   inline:
     - id: ctrip
       reason: 携程规则目前仍在聚合模块中，待实机验证后拆分
@@ -59,6 +60,12 @@ modules:
     path: modules/Weibo-AppRewrite.stoverride
     kind: app-rewrite
     status: stable
+    aggregate: true
+    conflict_group: all-https
+  - id: xiaohongshu
+    path: modules/Xiaohongshu-AppRewrite.stoverride
+    kind: app-rewrite
+    status: experimental
     aggregate: true
     conflict_group: all-https
   - id: apple-weatherkit
