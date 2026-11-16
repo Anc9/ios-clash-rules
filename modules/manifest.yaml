@@ -1,0 +1,69 @@
+schema: 1
+
+# Stable source paths are kept for existing Raw subscriptions.
+aggregate:
+  path: modules/All-HTTPS-AdBlock.stoverride
+  version: 1.0.9
+  includes:
+    - modules/Domestic-AdBlock.stoverride
+    - modules/Bilibili-AppRewrite.stoverride
+    - modules/Goofish-AppRewrite.stoverride
+    - modules/JD-AppRewrite.stoverride
+    - modules/QQNews-AppRewrite.stoverride
+    - modules/Taobao-AppRewrite.stoverride
+    - modules/Weibo-AppRewrite.stoverride
+  inline:
+    - id: ctrip
+      reason: 携程规则目前仍在聚合模块中，待实机验证后拆分
+    - id: zhihu
+      reason: 知乎规则目前仍在聚合模块中，待实机验证后拆分
+
+modules:
+  - id: domestic-adblock
+    path: modules/Domestic-AdBlock.stoverride
+    kind: shared-adblock
+    status: stable
+    aggregate: true
+    conflict_group: all-https
+  - id: bilibili
+    path: modules/Bilibili-AppRewrite.stoverride
+    kind: app-rewrite
+    status: stable
+    aggregate: true
+    conflict_group: all-https
+  - id: goofish
+    path: modules/Goofish-AppRewrite.stoverride
+    kind: app-rewrite
+    status: stable
+    aggregate: true
+    conflict_group: all-https
+  - id: jd
+    path: modules/JD-AppRewrite.stoverride
+    kind: app-rewrite
+    status: stable
+    aggregate: true
+    conflict_group: all-https
+  - id: qqnews
+    path: modules/QQNews-AppRewrite.stoverride
+    kind: app-rewrite
+    status: stable
+    aggregate: true
+    conflict_group: all-https
+  - id: taobao
+    path: modules/Taobao-AppRewrite.stoverride
+    kind: app-rewrite
+    status: stable
+    aggregate: true
+    conflict_group: all-https
+  - id: weibo
+    path: modules/Weibo-AppRewrite.stoverride
+    kind: app-rewrite
+    status: stable
+    aggregate: true
+    conflict_group: all-https
+  - id: apple-weatherkit
+    path: modules/Apple-WeatherKit.stoverride
+    kind: app-rewrite
+    status: experimental
+    aggregate: false
+    conflict_group: null

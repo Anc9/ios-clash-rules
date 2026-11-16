@@ -1,0 +1,26 @@
+schema: 1
+cases:
+  - module: modules/Bilibili-AppRewrite.stoverride
+    section: body-rewrite
+    url: https://app.bilibili.com/x/v2/splash/show?build=8000
+  - module: modules/Bilibili-AppRewrite.stoverride
+    section: body-rewrite
+    url: https://api.vc.bilibili.com/dynamic_svr/v1/dynamic_svr/dynamic_new?ps=20
+  - module: modules/Weibo-AppRewrite.stoverride
+    section: body-rewrite
+    url: https://api.weibo.cn/2/cardlist?containerid=231159&page=1
+  - module: modules/Weibo-AppRewrite.stoverride
+    section: body-rewrite
+    url: https://weibointl.api.weibo.cn/portal.php?a=trends&from=discover
+  - module: modules/Weibo-AppRewrite.stoverride
+    section: body-rewrite
+    url: https://api.weibo.cn/2/groups/timeline?since_id=1
+  - module: modules/All-HTTPS-AdBlock.stoverride
+    section: rewrite
+    url: https://m.ctrip.com/restapi/soa2/10123/json/getAdsList?param=1
+  - module: modules/All-HTTPS-AdBlock.stoverride
+    section: rewrite
+    url: https://api.zhihu.com/commercial_api/launch_v2?version=1
+  - module: modules/Apple-WeatherKit.stoverride
+    section: url-rewrite
+    url: https://weatherkit.apple.com/api/v1/availability/?lang=zh-CN
