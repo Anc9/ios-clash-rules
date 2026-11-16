@@ -374,6 +374,9 @@ rules:
 - RULE-SET,cm-media,🎬 流媒体
 - RULE-SET,cm-netflixip,🎬 流媒体,no-resolve
 - RULE-SET,cm-mediaip,🎬 流媒体,no-resolve
+# AI 域名的 UDP/QUIC 先拒绝，促使 iOS 回落到 HTTPS；不影响 Apple 等其他 UDP 流量
+- AND,((DOMAIN-SUFFIX,openai.com),(NETWORK,udp)),REJECT
+- AND,((DOMAIN-SUFFIX,chatgpt.com),(NETWORK,udp)),REJECT
 - RULE-SET,cm-ai,🤖 AI 服务
 - DOMAIN-SUFFIX,chatgpt.com,🤖 AI 服务
 - DOMAIN-SUFFIX,openai.com,🤖 AI 服务
