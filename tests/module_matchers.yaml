@@ -24,3 +24,15 @@ cases:
   - module: modules/Apple-WeatherKit.stoverride
     section: url-rewrite
     url: https://weatherkit.apple.com/api/v1/availability/?lang=zh-CN
+  - module: modules/Xiaohongshu-AppRewrite.stoverride
+    section: body-rewrite
+    url: https://edith.xiaohongshu.com/api/sns/v6/homefeed?oid=homefeed_recommend
+  - module: modules/Xiaohongshu-AppRewrite.stoverride
+    section: body-rewrite
+    url: https://edith.xiaohongshu.com/api/sns/v4/homefeed?oid=homefeed_recommend
+  - module: modules/Xiaohongshu-AppRewrite.stoverride
+    section: body-rewrite
+    url: https://edith.xiaohongshu.com/api/sns/v4/followfeed?cursor=1
+  - module: modules/All-HTTPS-AdBlock.stoverride
+    section: body-rewrite
+    url: https://edith.xiaohongshu.com/api/sns/v6/homefeed?oid=homefeed_recommend
