@@ -1,5 +1,11 @@
 # 变更记录
 
+## v2.2.4 — 2026-11-16
+
+- 将普通分流与 AI 自动兜底合并为唯一的 `rules/ClashRules.yaml`。
+- AI 自动顺序调整为香港、新加坡、日本、台湾、英国。
+- 删除独立的 `ClashRules-AI-Fallback.yaml`，避免 ProjectClash 显示两个规则方案。
+
 ## v2.2.3 — 2026-11-15
 
 - 新增独立的 `ClashRules-AI-Fallback.yaml` 测试方案。
