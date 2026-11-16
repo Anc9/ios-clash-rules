@@ -2,7 +2,7 @@
 
 适用于 [ProjectClash/Clash-Client](https://github.com/ProjectClash/Clash-Client) 的个人分流规则方案。
 
-> 当前版本 **v1.5（待 iOS 实机完整验证）**。这不是机场节点订阅，也不是一份包含节点的独立完整配置。
+> 当前版本 **v2.2.4（http 测试分支）**。这不是机场节点订阅，也不是一份包含节点的独立完整配置。
 
 ## 目标
 
@@ -14,23 +14,19 @@
 
 ## 规则文件
 
+当前只保留一个规则方案文件，普通分流和 AI 自动兜底已经合并：
+
 [`rules/ClashRules.yaml`](rules/ClashRules.yaml)
 
-测试 AI 兜底时，请使用单独的规则方案文件，不要覆盖正在使用的 `ClashRules` 链接：
+http 测试分支 Raw 地址：
 
-[`rules/ClashRules-AI-Fallback.yaml`](rules/ClashRules-AI-Fallback.yaml)
+`https://raw.githubusercontent.com/Anc9/ios-clash-rules/http/rules/ClashRules.yaml`
 
-Raw 地址：
-
-`https://raw.githubusercontent.com/Anc9/ios-clash-rules/main/rules/ClashRules-AI-Fallback.yaml`
-
-该测试方案只在日本、新加坡、美国、台湾和英国节点之间自动切换，香港节点不参与 AI 兜底。建议在 ProjectClash 中作为新的规则来源导入，或配合新建配置测试。
-
-本仓库为 Public，可使用固定 Raw URL：
+main 稳定分支 Raw 地址：
 
 `https://raw.githubusercontent.com/Anc9/ios-clash-rules/main/rules/ClashRules.yaml`
 
-**注意：** Raw URL 仅包含无凭据的规则方案；不要把 GitHub 访问令牌或机场订阅密钥写进 YAML。
+AI 自动组按香港、新加坡、日本、台湾、英国的顺序回退。美国节点仍保留在普通代理和流媒体策略组中，但不参与 AI 自动兜底。
 
 ## ProjectClash 使用方法
 
@@ -45,7 +41,7 @@ Raw 地址：
 ## 策略说明
 
 - `🚀 代理选择`：香港 / 日本 / 新加坡 / 美国 / 台湾 / 其他地区 / 全球自动
-- `🤖 AI 服务`：香港 / 日本 / 美国 / 新加坡自动，亦可跟随普通代理
+- `🤖 AI 服务`：香港 / 新加坡 / 日本 / 台湾 / 英国自动，并可跟随普通代理
 - `🎬 流媒体`：Netflix、Disney+、YouTube 及综合媒体规则走香港 / 日本 / 新加坡 / 美国节点
 - `🛡 广告拦截`：`REJECT` 开启，`DIRECT` 关闭
 - 各地区自动组为 `url-test`，测速目标 `https://www.gstatic.com/generate_204`，每 600 秒检查、容差 80 ms
