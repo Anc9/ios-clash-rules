@@ -7,6 +7,11 @@
 
 # 变更记录
 
+## v2.2.7 — 2026-11-16
+
+- 增加 `msmp.abchina.com.cn` 的 `REJECT-DROP` 拦截规则。
+
+
 ## v2.2.6 — 2026-11-16
 
 - 将「✈️ Telegram」改为 `select` 手动选择组。
