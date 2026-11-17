@@ -2,7 +2,7 @@
 
 适用于 [ProjectClash/Clash-Client](https://github.com/ProjectClash/Clash-Client) 的个人分流规则方案。
 
-> 当前版本 **v2.2.8（HTTPS 模块测试分支）**。这不是机场节点订阅，也不是一份包含节点的独立完整配置。
+> 当前版本 **v2.2.9（HTTPS 模块测试分支）**。这不是机场节点订阅，也不是一份包含节点的独立完整配置。
 
 ## 目标
 
@@ -36,13 +36,13 @@ AI 自动组按香港、新加坡、日本、台湾、英国的顺序回退，�
 
 - `🚀 代理选择`：香港 / 日本 / 新加坡 / 美国 / 台湾 / 其他地区 / 全球自动
 - `✈️ Telegram`：Telegram 专用手动选择，仅提供香港 / 日本 / 台湾自动组
-- `🍎 Apple`：Apple 服务与 App Store 专用手动选择；默认 `DIRECT`，需要美区下载时可切到美国自动组，另提供香港自动组和通用代理
+- `🍎 Apple`：默认选 `🍎 Apple 自动`，优先直连；Apple 测试地址连接失败时回退美国自动节点。也可手动选直连、美国、香港或通用代理
 - `🤖 AI 服务`：香港 / 新加坡 / 日本 / 台湾 / 英国自动，亦可跟随普通代理
 - `🎬 流媒体`：Netflix、Disney+、YouTube 及综合媒体规则走香港 / 日本 / 新加坡 / 美国节点
 - `🛡 广告拦截`：`REJECT` 开启，`DIRECT` 关闭
 - 各地区自动组为 `url-test`，测速目标 `https://www.gstatic.com/generate_204`，每 600 秒检查、容差 80 ms
 - `url-test` 衡量的是测速目标的响应延迟，**不是下载带宽、稳定性或 AI 地区解锁保证**
-- Apple 组覆盖 `cm-apple-cn` 规则集及 `apple.com`、`apple.com.cn`、`icloud.com`、`itunes.com`、`mzstatic.com`、`cdn-apple.com`；切换后需重新发起 App Store 下载。应用可用地区仍受 Apple 账号的国家或地区限制。
+- Apple 组覆盖 `cm-apple-cn` 规则集及 `apple.com`、`apple.com.cn`、`icloud.com`、`itunes.com`、`mzstatic.com`、`cdn-apple.com`；自动组每 300 秒检测 `https://apps.apple.com/` 的连通性，超时后按顺序回退。它无法判断某款美区 App 是否可下载；直连可用但需要美区出口时，手动选 `🇺🇸 美国自动`。切换后需重新发起 App Store 下载。应用可用地区仍受 Apple 账号的国家或地区限制。
 
 ## 修改与验证
 
