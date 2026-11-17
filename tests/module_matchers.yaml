@@ -36,3 +36,9 @@ cases:
   - module: modules/All-HTTPS-AdBlock.stoverride
     section: body-rewrite
     url: https://edith.xiaohongshu.com/api/sns/v6/homefeed?oid=homefeed_recommend
+  - module: modules/All-HTTPS-AdBlock.stoverride
+    section: rewrite
+    url: https://home.mi.com/cgi-op/api/v1/recommendation/openingBanner?locale=zh_CN
+  - module: modules/All-HTTPS-AdBlock.stoverride
+    section: rewrite
+    url: https://home.mi.com/cgi-op/api/v1/resource/realtime/openingBanner
