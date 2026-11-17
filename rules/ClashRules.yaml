@@ -1,10 +1,10 @@
 # ClashRules / iOS 分流规则
-# 版本: v2.2.7
+# 版本: v2.2.8
 # 作者: Anc9 (GitHub: https://github.com/Anc9)
-# 更新日期: 2026-11-16
+# 更新日期: 2026-11-17
 # 适用客户端: ProjectClash / Clash-Client (Mihomo)
 # 这是「规则方案」文件：在配置库里选择本文件作为规则方案；原机场订阅继续作为节点来源。
-# 顶层显示 5 个策略组；地区组设置 hidden: true，可从「🚀 代理选择」等入口访问。
+# 顶层显示 6 个策略组；地区组设置 hidden: true，可从「🚀 代理选择」等入口访问。
 # url-test 测的是访问 204 检测地址的延迟，不等于下载速度或 AI 服务解锁能力。
 # 保留旧版规则集和路由；不包含节点、节点密码、订阅 URL 或机场 DNS。
 # 注意：ProjectClash 的原始(Original)模式不会套用单独导入的规则方案。
@@ -52,6 +52,13 @@ proxy-groups:
   - 🇭🇰 香港自动
   - 🇯🇵 日本自动
   - 🇹🇼 台湾自动
+- name: 🍎 Apple
+  type: select
+  proxies:
+  - DIRECT
+  - 🇺🇸 美国自动
+  - 🇭🇰 香港自动
+  - 🚀 代理选择
 - name: 🎬 流媒体
   type: select
   proxies:
@@ -373,7 +380,13 @@ rules:
 - DOMAIN-SUFFIX,tenpay.com,DIRECT
 - DOMAIN-SUFFIX,unionpay.com,DIRECT
 - DOMAIN-SUFFIX,95516.com,DIRECT
-- RULE-SET,cm-apple-cn,DIRECT
+- DOMAIN-SUFFIX,apple.com,🍎 Apple
+- DOMAIN-SUFFIX,apple.com.cn,🍎 Apple
+- DOMAIN-SUFFIX,icloud.com,🍎 Apple
+- DOMAIN-SUFFIX,itunes.com,🍎 Apple
+- DOMAIN-SUFFIX,mzstatic.com,🍎 Apple
+- DOMAIN-SUFFIX,cdn-apple.com,🍎 Apple
+- RULE-SET,cm-apple-cn,🍎 Apple
 - RULE-SET,cm-microsoft-cn,DIRECT
 - RULE-SET,cm-netflix,🎬 流媒体
 - RULE-SET,cm-disney,🎬 流媒体
