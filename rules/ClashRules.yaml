@@ -1,5 +1,5 @@
 # ClashRules / iOS 分流规则
-# 版本: v2.2.8
+# 版本: v2.2.9
 # 作者: Anc9 (GitHub: https://github.com/Anc9)
 # 更新日期: 2026-11-17
 # 适用客户端: ProjectClash / Clash-Client (Mihomo)
@@ -55,10 +55,22 @@ proxy-groups:
 - name: 🍎 Apple
   type: select
   proxies:
+  - 🍎 Apple 自动
   - DIRECT
   - 🇺🇸 美国自动
   - 🇭🇰 香港自动
   - 🚀 代理选择
+- name: 🍎 Apple 自动
+  type: fallback
+  proxies:
+  - DIRECT
+  - 🇺🇸 美国自动
+  url: https://apps.apple.com/
+  interval: 300
+  timeout: 5000
+  max-failed-times: 2
+  lazy: false
+  hidden: true
 - name: 🎬 流媒体
   type: select
   proxies:
