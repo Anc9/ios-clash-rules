@@ -4,7 +4,7 @@ name: iOS 去广告与 App Rewrite 全量模块
 desc: 合并域名广告拦截、开屏域名和各 App 响应改写；与独立模块二选一
 author: Anc9
 category: AdBlock
-version: 1.0.10
+version: 1.0.11
 date: '2026-11-17'
 
 rule-providers:
@@ -94,6 +94,7 @@ http:
   - card.weibo.com
   - weibo.com
   - m.ctrip.com
+  - home.mi.com
   - dimg04.c-ctrip.com
   - api.zhihu.com
   - edith.xiaohongshu.com
@@ -113,6 +114,8 @@ http:
     - ^https?://acs\.m\.taobao\.com/gw/mtop\.alibaba\.advertisementservice\.getadv(?:/|\?|$) - reject-dict
     - ^https?://r\.inews\.qq\.com/(?:getSplash|getFullScreenPic)(?:/|\?|$) - reject-dict
     - ^https?://m\.ctrip\.com/restapi/soa2/\d+/json/getAdsList(?:\?.*)?$ - reject-dict
+    - ^https?://home\.mi\.com/cgi-op/api/v1/recommendation/openingBanner(?:/|\?|$) - reject-dict
+    - ^https?://home\.mi\.com/cgi-op/api/v1/resource/realtime/openingBanner(?:/|\?|$) - reject-dict
     - ^https?://m\.ctrip\.com/restapi/(?:.+/)?(?:sc)?json/tripAds(?:\?.*)?$ - reject-dict
     - ^https?://dimg04\.c-ctrip\.com/images/[A-Za-z0-9]{21}\.(?:jpg|png)(?:\?.*)?$ - reject-img
     - ^https?://api\.zhihu\.com/commercial_api/(?:launch_v2|real_time_launch_v2)(?:\?.*)?$ - reject-dict
