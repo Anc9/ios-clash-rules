@@ -7,6 +7,11 @@
 
 # 变更记录
 
+## HTTPS module 1.0.12 — 2026-11-18
+
+- 什么值得买：新增 `app-api.smzdm.com` MITM，并精确拒绝 `/util/loading` 开屏响应。
+- 聚合清单、匹配测试和 README 已同步更新，待真机验证后再决定是否拆分独立模块。
+
 ## HTTPS module 1.0.11 — 2026-11-17
 
 - 米家开屏：在聚合模块中针对 `home.mi.com` 的两个 `openingBanner` 接口返回空字典；现有 `sdkconfig.ad.xiaomi.com` 拦截保持不变。
