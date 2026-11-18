@@ -4,7 +4,7 @@ name: iOS 去广告与 App Rewrite 全量模块
 desc: 合并域名广告拦截、开屏域名和各 App 响应改写；与独立模块二选一
 author: Anc9
 category: AdBlock
-version: 1.0.12
+version: 1.0.13
 date: '2026-11-18'
 
 rule-providers:
@@ -102,6 +102,7 @@ http:
   - www.xiaohongshu.com
   - referee.xiaohongshu.com
   - app-api.smzdm.com
+  - homepage-api.smzdm.com
   rewrite:
     - ^https?://upos-sz-static\.bilivideo\.com/ssaxcode/\w{2}/\w{2}/\w{32}-1-SPLASH(?:\?.*)?$ - reject-dict
     - ^https?://(?:g-)?acs\.m\.goofish\.com/gw/mtop\.taobao\.idlecommerce\.splash\.ads(?:/|\?|$) - reject-dict
@@ -133,7 +134,6 @@ http:
     - ^https?://(?:m)?api\.weibo\.c(?:n|om)/2/!/(?:huati/discovery_home_bottom_channels|chaohua/discovery/home_bottom/switch|was/finder/searchbarchange)(?:\?.*)?$ - reject-dict
     - ^https?://card\.weibo\.com/article/m/aj/(?:reward|uvead)\?(?:.*)$ - reject-dict
     - ^https?://weibo\.com/ttarticle/x/m/aj/(?:reward|uvead)\?(?:.*)$ - reject-dict
-    - ^https?://app-api\.smzdm\.com/util/loading(?:/|\?|$) - reject-dict
   body-rewrite:
     - ^https?://app\.bilibili\.com/x/v2/splash/(?:list|show|event/list2)(?:\?.*)?$ response-jq .data.max_time = 0 | .data.min_interval = 31536000 | .data.pull_interval = 31536000 | .data.show = [] | .data.event_list = [] | .data.list |= if type == "array" then map(if type == "object" then .duration = 0 | .begin_time = 1915027200 | .end_time = 1924272000 else . end) elif type == "object" then .show = [] else . end
     - ^https?://api\.live\.bilibili\.com/xlive/app-room/v1/index/getInfoByRoom(?:\?.*)?$ response-jq .data.activity_banner_info = null
@@ -151,6 +151,8 @@ http:
     - ^https?://weibointl\.api\.weibo\.cn/portal\.php\?a=trends&(?:.*)$ response-jq .data.order = ["search_topic"] | del(.data.banner)
     - ^https?://(?:api\.weibo\.cn|api\.weibo\.com|mapi\.weibo\.com)/2/(?:groups/timeline|statuses/(?:unread|unread_hot_timeline|unread_friends_timeline|friends/timeline|friends_timeline|container_timeline(?:_hot|_unread)?))(?:\?.*)?$ response-jq .statuses |= if type == "array" then map(select((.mblogtype // 0) != 1 and ((.mblogtypename // "") != "广告") and ((.mblogtypename // "") != "热推") and (((.promotion // {}).type // "") != "ad") and (((.page_info // {}).actionlog.source // "") != "ad") and (((.content_auth_info // {}).content_auth_title // "") != "广告"))) else . end | .advertises = [] | .ad = [] | .trends = []
     - ^https?://(?:api\.weibo\.cn|api\.weibo\.com|mapi\.weibo\.com)/2/flowpage(?:\?.*)?$ response-jq .items |= if type == "array" then map(select(.itemId == "hotword" or (.type == "text" and ((.text.content // "") | contains("实时热点"))))) else . end | del(.channelInfo)
+    - ^https?://app-api\.smzdm\.com/util/loading(?:/|\?|$) response-jq .data |= if type == "array" then map(.start_date = "2040-01-01 00:00:00" | .end_date = "2040-01-01 23:59:59" | .unix_start_date = "2208960000" | .unix_end_date = "2209046399" | .is_show_ad = "0") else . end
+    - ^https?://homepage-api\.smzdm\.com/v3/home(?:\?.*)?$ response-jq .data.component |= if type == "array" then map(select((.zz_type // "") != "top_banner" and (.zz_type // "") != "hongbao") | if .zz_type == "banner" then .zz_content |= if type == "array" then map(select((.tag // "") != "广告")) else . end elif .zz_type == "list" then .zz_content |= if type == "array" then map(select((((.zz_content // {}).model_type // "")) != "ads")) else . end elif .zz_type == "circular_banner" then .zz_content.circular_banner_option.background = "1" | .zz_content.circular_banner_option.color_card = "#ffffff" | .zz_content.circular_banner_option.img = "" else . end) else . end
     - ^https?://(?:edith|rec|www)\.xiaohongshu\.com/api/sns/v6/homefeed(?:\?.*)?$ response-jq .data |= if type == "array" then map(select((.is_ads // false) != true and (.ads_info == null) and (.card_icon == null) and (((.note_attributes // []) | index("goods")) == null))) else . end
     - ^https?://edith\.xiaohongshu\.com/api/sns/v[1-5]/homefeed\?(?:.*)$ response-jq .data |= if type == "object" then with_entries(select((.value.is_ads // false) != true and (.value.ads_info == null) and (.value.card_icon == null))) elif type == "array" then map(select((.is_ads // false) != true and (.ads_info == null) and (.card_icon == null))) else . end
     - ^https?://(?:edith|rec|www)\.xiaohongshu\.com/api/sns/v\d+/followfeed(?:\?.*)?$ response-jq .data.items |= if type == "array" then map(select((.is_ads // false) != true and (.ads_info == null) and (.card_icon == null))) else . end
