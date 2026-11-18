@@ -108,7 +108,7 @@ http:
     - ^https?://(?:g-)?acs\.m\.goofish\.com/gw/mtop\.taobao\.idlemtopsearch\.item\.search\.activate/2\.0 - reject-dict
     - ^https?://(?:g-)?acs\.m\.goofish\.com/gw/mtop\.taobao\.idlemtopsearch\.search\.discover/1\.0 - reject-dict
     - ^https?://(?:g-)?acs\.m\.goofish\.com/gw/mtop\.taobao\.idle\.item\.resell\.recommendorhotcate/1\.0 - reject-dict
-    - ^https?://(?:g-)?acs\.m\.goofish\.com/gw/mtop\.taobao\.idle\.coin\.nextfresh/1\.0 - reject-dict
+    - ^https?://(?:g-)?acs\.m\.goofish\.com/gw/mtop\.taobao\.idlehome\.idle\.coin\.nextfresh/1\.0 - reject-dict
     - ^https?://(?:g-)?acs\.m\.goofish\.com/gw/mtop\.taobao\.idle\.item\.buy\.feeds(?:/|\?|$) - reject-dict
     - ^https?://(?:g-)?acs\.m\.goofish\.com/gw/mtop\.taobao\.idle\.playboy\.recommend/1\.0 - reject
     - ^https?://acs\.m\.taobao\.com/gw/mtop\.taobao\.(?:idlecommerce\.splash\.ads|idle\.home\.welcome)(?:/|\?|$) - reject-dict
@@ -146,7 +146,7 @@ http:
     - ^https?://(?:g-)?acs\.m\.goofish\.com/gw/mtop\.taobao\.idle\.fun\.follow\.often\.visit(?:/|\?|$) response-jq .data.sections = []
     - ^https?://(?:g-)?acs\.m\.goofish\.com/gw/mtop\.taobao\.idle\.circle\.myself\.banner/1\.0 response-jq .data.bannerList = []
     - ^https?://(?:g-)?acs\.m\.goofish\.com/gw/mtop\.taobao\.idle\.circle\.visited/1\.0 response-jq .data.visitedCircleList = []
-    - ^https?://api\.m\.jd\.com/client\.action\?functionId=start(?:&.*)?$ response-jq . |= if (.images | type) == "array" then (.images |= map(if type == "array" then map(if has("showTimes") then .showTimes = 0 | .onlineTime = "2030-12-24 00:00:00" | .referralsTime = "2030-12-25 00:00:00" | .time = 0 else . end) else . end) | .countdown = 100 | .showTimesDaily = 0) else . end
+    - ^https?://api\.m\.jd\.com/client\.action\?functionId=start(?:&.*)?$ response-jq . |= if (.images | type) == "array" then (.images |= map(if type == "array" then map(if type == "object" then if has("showTimes") then .showTimes = 0 | .onlineTime = "2030-12-24 00:00:00" | .referralsTime = "2030-12-25 00:00:00" | .time = 0 else . end else . end) else . end) | .countdown = 100 | .showTimesDaily = 0) else . end
     - ^https?://(?:api\.weibo\.cn|api\.weibo\.com|mapi\.weibo\.com)/2/cardlist\?(?:.*&)?containerid=231159(?:&.*)?$ response-jq .cards |= if type == "array" then map(if (.itemid // "") == "hotword" or (.card_type // 0) == 17 or (.card_type // 0) == 101 then . elif ((.card_group // null) | type) == "array" then .card_group |= map(select((.itemid // "") == "hotword" or (.card_type // 0) == 17 or (.card_type // 0) == 101)) | select((.card_group | length) > 0) else empty end) else . end | .items |= if type == "array" then map(select(.itemId == "hotword" or .itemid == "hotword" or (.type == "text" and ((.text.content // "") | contains("实时热点"))))) else . end
     - ^https?://weibointl\.api\.weibo\.cn/portal\.php\?a=trends&(?:.*)$ response-jq .data.order = ["search_topic"] | del(.data.banner)
     - ^https?://(?:api\.weibo\.cn|api\.weibo\.com|mapi\.weibo\.com)/2/(?:groups/timeline|statuses/(?:unread|unread_hot_timeline|unread_friends_timeline|friends/timeline|friends_timeline|container_timeline(?:_hot|_unread)?))(?:\?.*)?$ response-jq .statuses |= if type == "array" then map(select((.mblogtype // 0) != 1 and ((.mblogtypename // "") != "广告") and ((.mblogtypename // "") != "热推") and (((.promotion // {}).type // "") != "ad") and (((.page_info // {}).actionlog.source // "") != "ad") and (((.content_auth_info // {}).content_auth_title // "") != "广告"))) else . end | .advertises = [] | .ad = [] | .trends = []
