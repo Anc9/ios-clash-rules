@@ -3,7 +3,7 @@ schema: 1
 # Stable source paths are kept for existing Raw subscriptions.
 aggregate:
   path: modules/All-HTTPS-AdBlock.stoverride
-  version: 1.0.11
+  version: 1.0.12
   includes:
     - modules/Domestic-AdBlock.stoverride
     - modules/Bilibili-AppRewrite.stoverride
@@ -20,6 +20,8 @@ aggregate:
       reason: 知乎规则目前仍在聚合模块中，待实机验证后拆分
     - id: mijia
       reason: 米家开屏精确接口先在聚合模块中验证，确认稳定后再拆分
+    - id: smzdm
+      reason: 什么值得买开屏接口先在聚合模块中验证，确认稳定后再拆分
 
 modules:
   - id: domestic-adblock
