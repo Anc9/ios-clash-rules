@@ -43,5 +43,8 @@ cases:
     section: rewrite
     url: https://home.mi.com/cgi-op/api/v1/resource/realtime/openingBanner
   - module: modules/All-HTTPS-AdBlock.stoverride
-    section: rewrite
+    section: body-rewrite
     url: https://app-api.smzdm.com/util/loading?version=1
+  - module: modules/All-HTTPS-AdBlock.stoverride
+    section: body-rewrite
+    url: https://homepage-api.smzdm.com/v3/home?version=1
