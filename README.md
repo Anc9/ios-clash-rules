@@ -46,7 +46,7 @@ python scripts/check_aggregate.py
 python scripts/test_module_matchers.py
 ```
 
-聚合模块包含去广告和全部 App Rewrite，并试验性处理米家 `home.mi.com` 的两个开屏 `openingBanner` 接口。使用聚合模块时不要再同时启用下面的独立模块；独立模块适合单独排查某个 App。
+聚合模块包含去广告和全部 App Rewrite，并试验性处理米家 `home.mi.com` 的两个开屏 `openingBanner` 接口，以及什么值得买 `app-api.smzdm.com/util/loading` 开屏接口。使用聚合模块时不要再同时启用下面的独立模块；独立模块适合单独排查某个 App。
 
 去广告规则合并为一个模块；单个 App 的 Rewrite 独立启用。
 
