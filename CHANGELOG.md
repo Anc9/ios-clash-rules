@@ -7,6 +7,12 @@
 
 # 变更记录
 
+## HTTPS module 1.0.13 — 2026-11-18
+
+- 什么值得买开屏改为响应字段改写，将 `data` 数组的展示时间推迟到 2040 年并关闭 `is_show_ad`。
+- 新增 `homepage-api.smzdm.com/v3/home` 首页响应处理，移除顶部 banner、红包组件和广告信息流项。
+- 聚合清单、匹配测试和 README 已同步更新，待真机验证后再决定是否拆分独立模块。
+
 ## HTTPS module 1.0.12 — 2026-11-18
 
 - 什么值得买：新增 `app-api.smzdm.com` MITM，并精确拒绝 `/util/loading` 开屏响应。
