@@ -7,6 +7,12 @@
 
 # 变更记录
 
+## HTTPS module 1.0.14 — 2026-11-19
+
+- 淘宝智能柜相关日志确认 `mamasearchad.cloudvideocdn.taobao.com` 曾被直接放行，淘宝独立模块和聚合模块新增精确 `REJECT`。
+- 保留 `acs.m.taobao.com` 的现有 HTTPS MITM 和接口改写，避免影响扫码和支付宝支付链路。
+- 聚合版本、manifest 和变更记录已同步更新，待真机复现后继续确认广告是否来自 `acs.m.taobao.com` 响应内容。
+
 ## HTTPS module 1.0.13 — 2026-11-18
 
 - 什么值得买开屏改为响应字段改写，将 `data` 数组的展示时间推迟到 2040 年并关闭 `is_show_ad`。
