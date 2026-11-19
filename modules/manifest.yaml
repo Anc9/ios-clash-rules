@@ -3,7 +3,7 @@ schema: 1
 # Stable source paths are kept for existing Raw subscriptions.
 aggregate:
   path: modules/All-HTTPS-AdBlock.stoverride
-  version: 1.0.13
+  version: 1.0.14
   includes:
     - modules/Domestic-AdBlock.stoverride
     - modules/Bilibili-AppRewrite.stoverride
