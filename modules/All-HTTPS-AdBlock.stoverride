@@ -4,8 +4,8 @@ name: iOS 去广告与 App Rewrite 全量模块
 desc: 合并域名广告拦截、开屏域名和各 App 响应改写；与独立模块二选一
 author: Anc9
 category: AdBlock
-version: 1.0.13
-date: '2026-11-18'
+version: 1.0.14
+date: '2026-11-19'
 
 rule-providers:
   domestic-ads:
@@ -21,6 +21,7 @@ rules:
 - DOMAIN,ipm.atm.youku.com,REJECT
 - DOMAIN,splashqqlive.gtimg.com,REJECT
 - DOMAIN,poplayer.template.alibaba.com,REJECT
+- DOMAIN,mamasearchad.cloudvideocdn.taobao.com,REJECT
 - DOMAIN,df.tanx.com,REJECT
 - DOMAIN,bdlog.tanx.com,REJECT
 - DOMAIN,ssp-track.adn-plus.com.cn,REJECT
