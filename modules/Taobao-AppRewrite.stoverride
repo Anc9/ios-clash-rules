@@ -4,8 +4,11 @@ name: 淘宝 App Rewrite
 desc: 拒绝淘宝开屏和广告服务 JSON 响应
 author: Anc9
 category: AdBlock
-version: 1.0.2
-date: '2026-11-15'
+version: 1.0.3
+date: '2026-11-19'
+
+rules:
+- DOMAIN,mamasearchad.cloudvideocdn.taobao.com,REJECT
 
 http:
   mitm:
